@@ -246,33 +246,12 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 </div>
 
 <!-- FEATURED BANNER -->
-<div class="featured-banner sr">
-  <div class="fb-img">
-    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80" alt="Featured Property">
-    <div class="fb-badge">Featured Property</div>
-  </div>
-  <div class="fb-content">
-    <div class="fb-tag">Exclusive Listing · River Oaks</div>
-    <div class="fb-price">$3,850,000</div>
-    <div class="fb-addr">1204 Kirby Drive, River Oaks, Houston TX 77019</div>
-    <div class="fb-specs">
-      <div><span>6</span>Bedrooms</div>
-      <div><span>5.5</span>Bathrooms</div>
-      <div><span>6,200</span>Sq. Ft.</div>
-      <div><span>0.4</span>Acres</div>
-    </div>
-    <a href="jacob-property.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:var(--black);padding:14px 30px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s;width:fit-content;">
-      <span style="position:relative;z-index:1;display:flex;align-items:center;gap:10px;">View Property
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </a>
-  </div>
-</div>
+<div class="featured-banner sr" id="featuredBanner"><!-- populated by JS --></div>
 
 <!-- LISTINGS GRID -->
 <section class="listings-sec">
   <div class="grid-header sr">
-    <span class="grid-count" id="gridCount">Showing 9 of 24 properties</span>
+    <span class="grid-count" id="gridCount"></span>
     <div class="grid-views">
       <button class="vbtn active" id="gridBtn" title="Grid view">⊞</button>
       <button class="vbtn" id="listBtn" title="List view">☰</button>
@@ -299,7 +278,9 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
   <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="listings-data.js"></script>
+<script>
 // HAMBURGER
 const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
 if(hbg){hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});}
@@ -327,7 +308,6 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   <span>Book a Call</span>
 </button>
 
-<script src="listings-data.js"></script>
 <script>
 (function(){
   const PER_PAGE = 9;
@@ -557,7 +537,35 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   }
 
   buildDropdowns();
-  // ────────────────────────────────────────────────────────────
+
+  // ── FEATURED BANNER — always shows top non-sold listing ──────
+  (function buildFeatured(){
+    const f = LISTINGS.find(l => l.status !== 'Sold') || LISTINGS[0];
+    const banner = document.getElementById('featuredBanner');
+    if(!banner) return;
+    banner.innerHTML = `
+      <a href="jacob-property.html?id=${f.id}" class="fb-img" style="text-decoration:none;display:block;">
+        <img src="${f.images[0]}" alt="${f.address}">
+        <div class="fb-badge">${f.status === 'New' ? 'New Listing' : 'Featured Property'}</div>
+      </a>
+      <div class="fb-content">
+        <div class="fb-tag">Exclusive Listing · ${f.neighborhood}</div>
+        <div class="fb-price">${f.price}</div>
+        <div class="fb-addr">${f.address}, ${f.neighborhood}, ${f.city}</div>
+        <div class="fb-specs">
+          <div><span>${f.beds}</span>Bedrooms</div>
+          <div><span>${f.baths}</span>Bathrooms</div>
+          <div><span>${f.sqft}</span>Sq. Ft.</div>
+          <div><span>${f.lot.split(' ')[0]}</span>Acres</div>
+        </div>
+        <a href="jacob-property.html?id=${f.id}" style="display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:var(--black);padding:14px 30px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;width:fit-content;margin-top:8px;">
+          <span style="display:flex;align-items:center;gap:10px;">View Property
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>`;
+  })();
+  // ─────────────────────────────────────────────────────────────
 
   render();
 })();

@@ -446,7 +446,9 @@ footer { background:#040404; border-top:1px solid var(--border); padding:72px 8%
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="listings-data.js"></script>
+<script>
 // LOADER
 const lw = document.getElementById('lword');
 'JACOB WILLIAMS'.split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c===' '?'\u00A0':c;s.style.setProperty('--i',i);lw.appendChild(s);});
@@ -501,7 +503,6 @@ function toggleFaq(el){
   <span>Book a Call</span>
 </button>
 
-<script src="listings-data.js"></script>
 <script>
 (function(){
   // Show first 3 active (non-sold) listings on homepage
