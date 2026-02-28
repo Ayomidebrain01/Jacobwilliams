@@ -98,6 +98,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .lbadge{position:absolute;top:18px;left:18px;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px;}
 .lbadge.sold{border-color:rgba(201,169,110,.55);color:var(--gold);}
 .lbadge.pending{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.6);}
+.lbadge.rent{border-color:rgba(126,200,227,.7);color:var(--sky);background:rgba(126,200,227,.12);}
 .linfo{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;transform:translateY(10px);transition:transform .4s var(--ease);}
 .lc:hover .linfo{transform:none;}
 .lprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;color:var(--white);line-height:1;margin-bottom:7px;}
@@ -225,20 +226,13 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <button class="filter-btn active" data-filter="all">All Properties</button>
-  <button class="filter-btn" data-filter="sale">For Sale</button>
-  <button class="filter-btn" data-filter="new">New</button>
-  <button class="filter-btn" data-filter="pending">Pending</button>
-  <button class="filter-btn" data-filter="sold">Recently Sold</button>
-  <button class="filter-btn" data-filter="luxury">Luxury</button>
-  <button class="filter-btn" data-filter="new-construction">New Construction</button>
-  <button class="filter-btn" data-filter="family">Family</button>
-  <button class="filter-btn" data-filter="investment">Investment</button>
-  <button class="filter-btn" data-filter="condo-townhome">Condo / Townhome</button>
+  <button class="filter-btn" data-filter="for-sale">For Sale</button>
+  <button class="filter-btn" data-filter="for-rent">For Rent</button>
 </div>
 
 <!-- SEARCH ROW -->
 <div class="search-row">
-  <input class="s-input" type="text" placeholder="Search by neighborhood, street, or ZIP code...">
+  <input class="s-input" id="searchInput" type="text" placeholder="Search by neighborhood, street, or ZIP code...">
   <select class="s-select" id="filterPrice"><option value="">Any Price</option></select>
   <select class="s-select" id="filterBeds"><option value="">Any Beds</option></select>
   <select class="s-select" id="filterArea"><option value="">Any Area</option></select>
@@ -278,7 +272,6 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
   <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="listings-data.js"></script>
 <script>
 // HAMBURGER
@@ -309,6 +302,7 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 </button>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
 (function(){
   const PER_PAGE = 9;
   let currentPage = 1;
@@ -319,32 +313,28 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   let filterArea  = '';
 
   function priceNum(priceStr){
-    return parseInt(priceStr.replace(/[$,]/g,'')) / 1000;
+    // Strip everything except digits — handles "$1,450,000" and "$4,200 / mo"
+    return parseInt(priceStr.replace(/[$,\s\/a-zA-Z]/g,'')) / 1000;
   }
 
   function badgeClass(status){
     if(status==='Sold') return 'sold';
     if(status==='Pending') return 'pending';
+    if(status==='For Rent') return 'rent';
     return '';
   }
 
   function filtered(){
     return LISTINGS.filter(p => {
-      // Tab filter — uses explicit categories[] + status
+      // Tab filter — uses listingType and categories[]
       const cats = p.categories || [];
       const matchFilter =
         activeFilter === 'all' ||
-        (activeFilter === 'sale'             && (p.status === 'For Sale' || p.status === 'New')) ||
-        (activeFilter === 'new'              && p.status === 'New') ||
-        (activeFilter === 'pending'          && p.status === 'Pending') ||
-        (activeFilter === 'sold'             && p.status === 'Sold') ||
-        (activeFilter === 'luxury'           && cats.includes('luxury')) ||
-        (activeFilter === 'new-construction' && cats.includes('new-construction')) ||
-        (activeFilter === 'family'           && cats.includes('family')) ||
-        (activeFilter === 'investment'       && cats.includes('investment')) ||
-        (activeFilter === 'condo-townhome'   && cats.includes('condo-townhome'));
+        (activeFilter === 'for-sale' && (p.listingType === 'For Sale' || cats.includes('for-sale'))) ||
+        (activeFilter === 'for-rent' && (p.listingType === 'For Rent' || cats.includes('for-rent')));
 
       // Price dropdown
+      const pNum = priceNum(p.price);
       let matchPrice = true;
       if(filterPrice){
         const [lo,hi] = filterPrice.split('-').map(Number);
@@ -477,7 +467,7 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   // ── BUILD DROPDOWNS FROM LIVE DATA ──────────────────────────
   function buildDropdowns(){
     // PRICE — generate smart brackets from actual prices in data
-    const prices = LISTINGS.map(p => parseInt(p.price.replace(/[$,]/g,''))).sort((a,b)=>a-b);
+    const prices = LISTINGS.map(p => parseInt(p.price.replace(/[$,\s\/a-zA-Z]/g,''))).sort((a,b)=>a-b);
     const min = prices[0];
     const max = prices[prices.length-1];
 
@@ -569,6 +559,7 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 
   render();
 })();
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
