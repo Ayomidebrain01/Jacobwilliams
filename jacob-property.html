@@ -13,7 +13,8 @@ body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--wh
 .cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
 .cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
 .cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:transparent;transition:background .5s var(--ease,cubic-bezier(.76,0,.24,1)),border-color .5s;border-bottom:1px solid transparent;}
+nav.on{background:#000;border-color:var(--border);}
 .logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
 .navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover{color:var(--white);}.navul a:hover::after{transform:scaleX(1);}
 .ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
@@ -183,7 +184,7 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="curRing"></div>
 
-<nav>
+<nav id="nav">
   <a href="index.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
   <ul class="navul">
     <li><a href="jacob-listings.html">Listings</a></li>
@@ -631,5 +632,24 @@ const LISTINGS = [
   document.querySelectorAll('.sr:not(.vis)').forEach(el => obs.observe(el));
 })();
 </script>
+
+// ── NAV TRANSPARENCY ────────────────────────────────────────
+(function(){
+  var nav = document.getElementById('nav') || document.querySelector('nav');
+  function updateNav(){
+    // Find the hero section (first full-width section after nav)
+    var hero = document.querySelector('.hero-section,.page-hero,.gallery-hero,.contact-hero,.ah-hero,.srv-hero') 
+            || document.querySelector('section,header');
+    var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 10) : 80;
+    if(window.scrollY >= threshold){
+      nav.classList.add('on');
+    } else {
+      nav.classList.remove('on');
+    }
+  }
+  window.addEventListener('scroll', updateNav, {passive:true});
+  updateNav();
+})();
+
 </body>
 </html>
