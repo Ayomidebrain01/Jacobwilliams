@@ -150,6 +150,33 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 .cal-fab:hover::before{transform:scaleX(1);}
 .cal-fab span,.cal-fab svg{position:relative;z-index:1;}
 @media(max-width:480px){.cal-fab{padding:12px 18px;font-size:.65rem;bottom:20px;right:20px;}}
+
+/* ── MOBILE CAROUSEL ─────────────────────────────────────── */
+@media(max-width:1100px){
+  .gallery-hero{height:65vw;min-height:280px;flex-direction:column;}
+  .gallery-main{width:100%;flex:1;position:relative;overflow:hidden;touch-action:pan-y;}
+  .carousel-track{display:flex;height:100%;transition:transform .45s var(--ease);will-change:transform;}
+  .carousel-track img{width:100%;height:100%;object-fit:cover;flex-shrink:0;}
+  .gallery-strip{display:none;}
+  /* Prev / Next arrows */
+  .car-arrow{display:flex;position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(8,8,8,.55);border:1px solid rgba(255,255,255,.15);color:var(--white);width:40px;height:40px;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);transition:background .3s;border-radius:0;}
+  .car-arrow:hover{background:rgba(126,200,227,.35);}
+  .car-prev{left:14px;}
+  .car-next{right:14px;}
+  /* Dot indicators */
+  .car-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10;}
+  .car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .3s,transform .3s;}
+  .car-dot.active{background:var(--sky);transform:scale(1.3);}
+  /* Progress bar */
+  .car-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--sky);transition:none;z-index:10;}
+}
+/* Hide arrows on desktop */
+@media(min-width:1101px){
+  .car-arrow,.car-dots,.car-progress{display:none!important;}
+  .carousel-track{display:contents;}
+  .carousel-track img{display:none;}
+  #mainImg{display:block!important;}
+}
 </style>
 </head>
 <body>
@@ -177,10 +204,18 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 
 <!-- GALLERY HERO -->
 <div class="gallery-hero" id="galleryHero">
-  <div class="gallery-main">
+  <div class="gallery-main" id="galleryMain">
+    <!-- Desktop: single swapping image -->
     <img id="mainImg" src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1400&q=80" alt="1204 Kirby Drive">
+    <!-- Mobile: carousel track (populated by JS) -->
+    <div class="carousel-track" id="carTrack"></div>
     <div class="gallery-ov"></div>
-    <button class="gallery-fullscreen">View All Photos</button>
+    <!-- Carousel controls (mobile only) -->
+    <button class="car-arrow car-prev" id="carPrev" aria-label="Previous">&#8592;</button>
+    <button class="car-arrow car-next" id="carNext" aria-label="Next">&#8594;</button>
+    <div class="car-dots" id="carDots"></div>
+    <div class="car-progress" id="carProgress"></div>
+
     <div class="gallery-count" id="gallCount">1 / 5</div>
   </div>
   <div class="gallery-strip">
@@ -347,15 +382,14 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
   <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="listings-data.js"></script>
+
 <script>
-// HAMBURGER
+// ── HAMBURGER ────────────────────────────────────────────────
 const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
 if(hbg){hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});}
 document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
 
-// CURSOR
+// ── CURSOR ───────────────────────────────────────────────────
 const isMobile=window.matchMedia('(hover:none),(pointer:coarse)').matches;
 if(isMobile){document.body.style.cursor='auto';}
 const cur=document.getElementById('cur'),cr=document.getElementById('curRing');
@@ -364,9 +398,22 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 if(!isMobile&&cur){(function anim(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.28;ry+=(my-ry)*.28;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(anim);})();}
 if(!isMobile&&cur){document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});});}
 
-// SCROLL REVEAL
+// ── SCROLL REVEAL ────────────────────────────────────────────
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+
+// ── LISTINGS DATA ────────────────────────────────────────────
+const LISTINGS = [
+  {id:1,listingType:"For Sale",status:"For Sale",price:"$1,450,000",address:"4812 Shadyside Ln",neighborhood:"River Oaks",city:"Houston, TX 77019",beds:4,baths:3.5,sqft:"3,800",garage:2,lot:"0.22 Acres",yearBuilt:2016,propertyType:"Single Family Home",hoa:"$320 / month",tax:"~$28,000 / year (est.)",school:"Houston ISD (River Oaks Elementary)",mls:"HAR-2025-10041",daysOnMarket:7,categories:["for-sale"],images:["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80","https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80","https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1400&q=80","https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1400&q=80"],description:["Welcome to 4812 Shadyside Lane — a beautifully appointed residence in the heart of River Oaks. This four-bedroom home combines classic architecture with refined modern updates, offering an exceptional standard of living in Houston's most prestigious neighborhood.","The open-plan main level features a chef's kitchen with quartz countertops, professional appliances, and a large island that flows naturally into the living and dining areas. Floor-to-ceiling windows flood the home with natural light and offer views of the manicured rear garden.","The primary suite is a true retreat, featuring a spa-inspired ensuite bathroom with a soaking tub, walk-in shower, and custom closets. Three additional bedrooms each offer generous proportions and easy access to well-appointed bathrooms.","Situated minutes from River Oaks Country Club, top dining, and Houston's finest schools, this property represents exceptional value in one of the city's most sought-after zip codes."],features:["Chef's kitchen with quartz countertops","Open-plan living and dining","Primary suite with spa bath","2-car attached garage","Landscaped rear garden","Hardwood floors throughout","Smart home system","Covered outdoor entertaining area","Custom closets and millwork","River Oaks school district","Minutes from River Oaks Country Club","New roof (2022)"],nearby:[{name:"River Oaks Country Club",dist:"0.5 mi"},{name:"River Oaks Elementary",dist:"0.6 mi"},{name:"The Galleria",dist:"2.3 mi"},{name:"Downtown Houston",dist:"4.6 mi"}]},
+  {id:2,listingType:"For Sale",status:"New",price:"$975,000",address:"2203 Rutland St",neighborhood:"The Heights",city:"Houston, TX 77008",beds:3,baths:2,sqft:"2,100",garage:2,lot:"0.14 Acres",yearBuilt:2020,propertyType:"Single Family Home",hoa:"None",tax:"~$18,500 / year (est.)",school:"Houston ISD (Harvard Elementary)",mls:"HAR-2025-10042",daysOnMarket:2,categories:["for-sale"],images:["https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=1400&q=80","https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80","https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80"],description:["Nestled in one of Houston's most vibrant and walkable neighborhoods, 2203 Rutland Street is a beautifully designed modern craftsman home built in 2020. The Heights lifestyle — boutique shops, acclaimed restaurants, and scenic bike trails — is literally steps from your door.","The thoughtfully designed interior offers an open living space anchored by a gourmet kitchen with waterfall island, custom cabinetry, and high-end appliances. The living room opens through French doors to a private covered porch.","Three bedrooms include a serene primary suite with a luxurious bathroom featuring double vanities and an oversized walk-in shower. Both guest bedrooms offer excellent natural light and generous closet space.","With no HOA, a private 2-car garage, and a prime walkable location, this home is a rare find in one of Houston's most desirable inner-loop neighborhoods."],features:["Modern craftsman architecture","Open kitchen with waterfall island","French doors to covered porch","Primary suite with double vanities","2-car detached garage","No HOA","Walking distance to Heights restaurants","Hardwood floors throughout","Energy-efficient construction (2020)","Private backyard","Laundry room with utility sink","Pre-wired for security system"],nearby:[{name:"Heights Mercantile",dist:"0.2 mi"},{name:"Harvard Elementary",dist:"0.4 mi"},{name:"White Oak Bayou Trail",dist:"0.3 mi"},{name:"Downtown Houston",dist:"3.1 mi"}]},
+  {id:3,listingType:"For Sale",status:"For Sale",price:"$2,100,000",address:"7701 Hunters Creek Dr",neighborhood:"Memorial",city:"Houston, TX 77024",beds:5,baths:4,sqft:"4,200",garage:3,lot:"0.35 Acres",yearBuilt:2014,propertyType:"Single Family Home",hoa:"$500 / month",tax:"~$38,000 / year (est.)",school:"Spring Branch ISD (Memorial Elementary)",mls:"HAR-2025-10043",daysOnMarket:11,categories:["for-sale"],images:["https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1400&q=80","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80","https://images.unsplash.com/photo-1598228723793-52759bba239c?w=1400&q=80","https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80"],description:["Commanding one of Memorial's finest lots, 7701 Hunters Creek Drive is an exceptional five-bedroom estate offering the scale, privacy, and finishes that discerning buyers demand. Situated behind a gated motor court on a quiet, tree-lined street, this home delivers refined luxury living.","The entry opens to soaring ceilings and a gracious staircase. A formal dining room, paneled study, and expansive family room with fireplace anchor the main level. The gourmet kitchen is a chef's dream, complete with a La Cornue range, marble countertops, and a butler's pantry.","Outside, a covered loggia overlooks a resort-style pool, spa, and lush landscaped grounds — ideal for Houston's year-round entertaining lifestyle. The primary suite above features dual spa bathrooms and a custom dressing room.","Zoned to Spring Branch ISD's highly rated Memorial schools and moments from Memorial Park, Buffalo Bayou, and the best of Houston's inner loop."],features:["Gated motor court entry","Resort-style pool and spa","La Cornue range & marble counters","Butler's pantry","Primary suite with dual spa baths","3-car garage with epoxy floors","Formal dining & paneled study","Covered loggia & outdoor kitchen","Generator (whole home)","Custom dressing room","Spring Branch ISD schools","0.35 acre landscaped lot"],nearby:[{name:"Memorial Park",dist:"1.2 mi"},{name:"Memorial Elementary",dist:"0.7 mi"},{name:"CityCentre Houston",dist:"1.8 mi"},{name:"The Galleria",dist:"3.5 mi"}]},
+  {id:5,listingType:"For Sale",status:"For Sale",price:"$1,175,000",address:"5509 Maple St",neighborhood:"Bellaire",city:"Houston, TX 77401",beds:4,baths:3,sqft:"2,800",garage:2,lot:"0.18 Acres",yearBuilt:2017,propertyType:"Single Family Home",hoa:"None",tax:"~$22,000 / year (est.)",school:"Bellaire ISD (Bellaire Elementary)",mls:"HAR-2025-10045",daysOnMarket:14,categories:["for-sale"],images:["https://images.unsplash.com/photo-1598228723793-52759bba239c?w=1400&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80","https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1400&q=80","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80"],description:["Located in the heart of the City of Bellaire — Houston's beloved 'Bayou City within a city' — 5509 Maple Street is a superbly finished four-bedroom home that ticks every box for families seeking top schools, community, and quality construction.","The home's generous proportions shine in the open-concept main living area, where a gourmet kitchen with custom white cabinetry, stainless appliances, and quartz counters overlooks a bright breakfast area and family room with fireplace.","Four bedrooms include a large primary suite with a luxurious bathroom and walk-in closet. Upstairs, a flexible game room can serve as a fifth bedroom, playroom, or home office.","No HOA, zoned to the highly rated Bellaire ISD, and moments from the West University border and Rice Village's boutique shopping and dining — an ideal family home in one of Houston's safest communities."],features:["Zoned to top-rated Bellaire ISD","No HOA","Gourmet kitchen with white cabinetry","Family room with fireplace","Upstairs game/flex room","Primary suite with walk-in closet","2-car attached garage","Covered back patio","Hardwood floors main level","Walking distance to parks","Minutes from Rice Village","Cul-de-sac street"],nearby:[{name:"Bellaire Elementary",dist:"0.4 mi"},{name:"Rice Village",dist:"1.5 mi"},{name:"West University Place",dist:"0.8 mi"},{name:"Medical Center",dist:"3.2 mi"}]},
+  {id:9,listingType:"For Sale",status:"Pending",price:"$665,000",address:"2200 Main St",neighborhood:"Midtown",city:"Houston, TX 77002",beds:3,baths:2,sqft:"1,800",garage:2,lot:"0.08 Acres",yearBuilt:2022,propertyType:"Townhome",hoa:"$250 / month",tax:"~$13,000 / year (est.)",school:"Houston ISD (Poe Elementary)",mls:"HAR-2025-10049",daysOnMarket:4,categories:["for-sale"],images:["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80","https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80","https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=1400&q=80","https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80"],description:["Positioned at the epicentre of Houston's most dynamic urban neighbourhood, 2200 Main Street is a brand-new 2022 luxury townhome offering three bedrooms, a private rooftop terrace, and the very best of Midtown walkability.","The stunning interior showcases 10-foot ceilings, engineered hardwood floors, and a chef's kitchen featuring Italian cabinetry, Bosch appliances, and Calacatta marble-look quartz countertops. The main living level opens to a private balcony.","The third-floor primary suite offers spectacular skyline views, a spa bathroom with frameless glass shower, and a custom walk-in closet. Two secondary bedrooms and a full bath occupy the second level.","Steps from the METRORail, Midtown Park, and Houston's best restaurants and nightlife. This is urban Houston living at its absolute finest — under contract in just 4 days."],features:["2022 luxury construction","Private rooftop terrace","Houston skyline views","Italian cabinetry in kitchen","Bosch appliance package","10-foot ceilings","Engineered hardwood floors","2-car garage","Steps from METRORail","Midtown Park walkable","Calacatta quartz countertops","Frameless glass shower"],nearby:[{name:"Midtown Park",dist:"0.1 mi"},{name:"METRORail Main Street",dist:"0.2 mi"},{name:"Downtown Houston",dist:"1.2 mi"},{name:"Museum District",dist:"1.5 mi"}]},
+  {id:4,listingType:"For Rent",status:"For Rent",price:"$4,200 / mo",address:"1822 Westheimer Rd",neighborhood:"Montrose",city:"Houston, TX 77098",beds:3,baths:2.5,sqft:"1,950",garage:2,lot:"0.10 Acres",yearBuilt:2019,propertyType:"Townhome",hoa:"$175 / month",tax:"—",school:"Houston ISD (Poe Elementary)",mls:"HAR-2025-10044",daysOnMarket:5,categories:["for-rent"],images:["https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80","https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80","https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=1400&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80"],description:["Set on one of Montrose's most energetic corridors, 1822 Westheimer Road is a sleek, contemporary townhome available for rent. Three bedrooms, 2.5 baths, and an exceptional inner-loop location in Houston's most culturally vibrant neighborhood.","The open main living level is defined by high ceilings, wide-plank oak flooring, and a modern kitchen featuring Bosch appliances, quartz counters, and a large peninsula. A powder room and private outdoor terrace complete the floor.","The third-floor primary suite is a peaceful retreat, away from street noise, with a generous walk-in closet and a spa-like bathroom. Two lower-level bedrooms share a well-appointed full bathroom.","Steps from Montrose's acclaimed restaurants, galleries, and nightlife — and within minutes of the Museum District and Midtown. This is the quintessential inner-loop Houston lifestyle property."],features:["Contemporary 2019 construction","Wide-plank oak flooring","Bosch kitchen appliances","Private rooftop terrace","Third-floor primary retreat","2-car garage","Low-maintenance landscaping","Energy Star certified","Steps from Montrose restaurants","Museum District nearby","Walkable neighborhood","Smart thermostat & locks"],nearby:[{name:"Menil Collection",dist:"0.8 mi"},{name:"Museum District",dist:"1.0 mi"},{name:"Poe Elementary",dist:"0.5 mi"},{name:"Downtown Houston",dist:"3.4 mi"}]},
+  {id:6,listingType:"For Rent",status:"For Rent",price:"$8,500 / mo",address:"3301 Rice Blvd",neighborhood:"West University",city:"Houston, TX 77005",beds:5,baths:4.5,sqft:"4,600",garage:3,lot:"0.28 Acres",yearBuilt:2015,propertyType:"Single Family Home",hoa:"$200 / month",tax:"—",school:"West University Elementary",mls:"HAR-2025-10046",daysOnMarket:9,categories:["for-rent"],images:["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80","https://images.unsplash.com/photo-1598228723793-52759bba239c?w=1400&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80","https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80"],description:["3301 Rice Boulevard is a landmark West University Place residence — a distinguished five-bedroom estate available for rent. This gracious home offers resort-style living in one of Houston's most coveted zip codes.","The grand entry opens to a paneled library, formal dining room, and a spectacular kitchen-family room at the rear. The chef's kitchen features a professional range, marble countertops, custom cabinetry, and a butler's pantry.","The resort-style rear grounds feature a covered outdoor kitchen, pool, and spa set against mature landscaping. Three upper-level bedrooms and a primary suite with sitting room round out the exceptional floor plan.","Zoned to West University Elementary, minutes from Rice University, Rice Village, and the Museum District. A rare rental opportunity in a neighborhood that almost never rents."],features:["Resort pool, spa & outdoor kitchen","Paneled library","Formal dining room","Primary suite with sitting room","3-car garage","Mature landscaping","Smart home system","West University Elementary district","Walking distance to Rice University","Multiple living areas","Wine cellar","Available immediately"],nearby:[{name:"Rice University",dist:"0.6 mi"},{name:"West University Elementary",dist:"0.3 mi"},{name:"Rice Village",dist:"0.5 mi"},{name:"Museum District",dist:"1.8 mi"}]},
+  {id:7,listingType:"For Rent",status:"For Rent",price:"$2,800 / mo",address:"420 Cinco Ranch Blvd",neighborhood:"Katy",city:"Houston, TX 77494",beds:4,baths:3,sqft:"2,400",garage:2,lot:"0.16 Acres",yearBuilt:2018,propertyType:"Single Family Home",hoa:"$120 / month",tax:"—",school:"Katy ISD (Cinco Ranch Elementary)",mls:"HAR-2025-10047",daysOnMarket:18,categories:["for-rent"],images:["https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80","https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80","https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=1400&q=80"],description:["Situated in the master-planned Cinco Ranch community, 420 Cinco Ranch Blvd is an immaculate four-bedroom home available for rent, zoned to Katy ISD — consistently ranked among Texas's best school districts.","The open-plan living and kitchen area is the heart of the home, featuring granite countertops, stainless appliances, and a large island breakfast bar. A dedicated dining area and flex room complete the main level.","Four well-proportioned bedrooms include a primary suite with double vanities, a soaking tub, and separate walk-in shower. A large backyard with covered patio is perfect for Texas outdoor living.","Cinco Ranch residents enjoy resort-style amenities including multiple pools, walking trails, tennis courts, and scenic lakes — all within minutes."],features:["Katy ISD schools","Open kitchen with granite island","Primary suite with soaking tub","Covered back patio","2-car garage","Community pools & trails","Flex/study room","Sprinkler system","Energy-efficient 2018 build","Cul-de-sac location","Walking distance to Cinco Ranch Lake","Minutes to I-10 & Energy Corridor"],nearby:[{name:"Cinco Ranch Elementary",dist:"0.5 mi"},{name:"Cinco Ranch Lake & Park",dist:"0.3 mi"},{name:"LaCenterra at Cinco Ranch",dist:"1.2 mi"},{name:"I-10 / Energy Corridor",dist:"4.0 mi"}]},
+  {id:8,listingType:"For Rent",status:"New",price:"$3,600 / mo",address:"1609 First Colony Blvd",neighborhood:"Sugar Land",city:"Sugar Land, TX 77479",beds:4,baths:3.5,sqft:"3,100",garage:3,lot:"0.21 Acres",yearBuilt:2021,propertyType:"Single Family Home",hoa:"$220 / month",tax:"—",school:"Fort Bend ISD (First Colony Elementary)",mls:"HAR-2025-10048",daysOnMarket:3,categories:["for-rent"],images:["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80","https://images.unsplash.com/photo-1598228723793-52759bba239c?w=1400&q=80","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80"],description:["Just listed for rent — 1609 First Colony Blvd is a stunning 2021-built home in Sugar Land's prestigious First Colony community. Four bedrooms, a 3-car garage, and an exceptional open floor plan make this a standout rental opportunity.","The soaring two-story entry gives way to a formal dining room and dedicated study before opening to a spectacular great room and chef's kitchen — complete with a GE Café appliance suite, quartz counters, and a large island.","The primary suite on the main level is a haven of calm with bay windows overlooking the garden, spa-like bathroom, and custom walk-in closet system. Three additional bedrooms and a game room occupy the upper level.","Fort Bend ISD schools, community walking trails, and easy access to Sugar Land Town Center and major Houston highways make this an ideal rental choice."],features:["2021 new construction","GE Café appliance suite","Two-story entry foyer","Main-level primary suite","Game room upstairs","3-car garage","Fort Bend ISD (top-rated)","Bay windows in primary suite","Custom closet system","Community walking trails","Quartz countertops throughout","Tankless water heater"],nearby:[{name:"First Colony Elementary",dist:"0.6 mi"},{name:"Sugar Land Town Center",dist:"1.4 mi"},{name:"Brazos River Park",dist:"2.0 mi"},{name:"Highway 59 / Southwest Frwy",dist:"2.5 mi"}]}
+];
 </script>
 
 <!-- CALENDLY -->
@@ -387,7 +434,7 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   // Update page title
   document.getElementById('pageTitle').textContent = p.address + ' — Jacob Williams Luxury Real Estate';
 
-  // Gallery
+  // ── DESKTOP GALLERY (thumbnail strip + main image swap) ────
   const mainImg = document.getElementById('mainImg');
   mainImg.src = p.images[0];
   mainImg.alt = p.address;
@@ -398,13 +445,138 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
       <img src="${src}" alt="${p.address} photo ${i+1}" loading="lazy">
     </div>`).join('');
 
+  window.setImg = function(idx, el){
+    mainImg.src = p.images[idx];
+    document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));
+    if(el) el.classList.add('active');
+    document.getElementById('gallCount').textContent = (idx+1) + ' / ' + p.images.length;
+    // Sync carousel index on mobile
+    goTo(idx);
+  };
+
+  // ── MOBILE CAROUSEL ────────────────────────────────────────
+  const track    = document.getElementById('carTrack');
+  const dotsEl   = document.getElementById('carDots');
+  const countEl  = document.getElementById('gallCount');
+  const progress = document.getElementById('carProgress');
+  const prevBtn  = document.getElementById('carPrev');
+  const nextBtn  = document.getElementById('carNext');
+  const total    = p.images.length;
+  let current    = 0;
+  let autoTimer  = null;
+  let progTimer  = null;
+
+  // Build carousel slides
+  track.innerHTML = p.images.map(src =>
+    `<img src="${src}" alt="${p.address}" loading="lazy" draggable="false">`
+  ).join('');
+
+  // Build dots
+  dotsEl.innerHTML = p.images.map((_,i) =>
+    `<div class="car-dot${i===0?' active':''}"></div>`
+  ).join('');
+
+  function goTo(idx){
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    // Update dots
+    document.querySelectorAll('.car-dot').forEach((d,i) => d.classList.toggle('active', i===current));
+    // Update count
+    countEl.textContent = (current+1) + ' / ' + total;
+    // Sync desktop thumb
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    thumbs.forEach(t=>t.classList.remove('active'));
+    if(thumbs[current]) thumbs[current].classList.add('active');
+    mainImg.src = p.images[current];
+    // Restart progress bar
+    restartProgress();
+  }
+
+  function restartProgress(){
+    clearTimeout(progTimer);
+    progress.style.transition = 'none';
+    progress.style.width = '0%';
+    // Force reflow
+    progress.getBoundingClientRect();
+    progress.style.transition = 'width 7s linear';
+    progress.style.width = '100%';
+    progTimer = setTimeout(() => { goTo(current + 1); }, 7000);
+  }
+
+  function startAuto(){
+    stopAuto();
+    restartProgress();
+  }
+
+  function stopAuto(){
+    clearTimeout(progTimer);
+    progress.style.transition = 'none';
+    progress.style.width = '0%';
+  }
+
+  // Arrow buttons
+  prevBtn.addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+  nextBtn.addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+  // Touch / swipe
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isDragging  = false;
+
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isDragging = true;
+    stopAuto();
+    track.style.transition = 'none';
+  }, { passive: true });
+
+  track.addEventListener('touchmove', e => {
+    if(!isDragging) return;
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    // If more horizontal than vertical — handle it (prevent page scroll)
+    if(Math.abs(dx) > Math.abs(dy)){
+      e.preventDefault();
+      const base = -(current * 100);
+      const pct  = (dx / track.parentElement.offsetWidth) * 100;
+      track.style.transform = `translateX(calc(${base}% + ${dx}px))`;
+    }
+  }, { passive: false });
+
+  track.addEventListener('touchend', e => {
+    if(!isDragging) return;
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    track.style.transition = '';
+    const threshold = track.parentElement.offsetWidth * 0.2;
+    if(dx < -threshold){
+      goTo(current + 1);
+    } else if(dx > threshold){
+      goTo(current - 1);
+    } else {
+      goTo(current); // snap back
+    }
+    startAuto();
+  }, { passive: true });
+
+  // Pause auto on user interaction, resume on leave
+  const gallMain = document.getElementById('galleryMain');
+  gallMain.addEventListener('mouseenter', stopAuto);
+  gallMain.addEventListener('mouseleave', startAuto);
+
+  // Start the carousel
+  goTo(0);
+  startAuto();
+
+  // ── PAGE CONTENT ────────────────────────────────────────────
   // Breadcrumb
   document.querySelector('.breadcrumb .current').textContent = p.address + ', ' + p.neighborhood;
 
   // Badge
-  function badgeClass(s){ return s==='Sold'?'sold':s==='Pending'?'pending':''; }
+  function badgeClass(s){ return s==='Sold'?'sold':s==='Pending'?'pending':s==='For Rent'?'rent':''; }
   const badge = document.querySelector('.prop-badge');
-  badge.textContent = p.status + (p.status==='For Sale'||p.status==='New' ? ' · Exclusive Listing' : '');
+  badge.textContent = p.status + (p.listingType==='For Sale' ? ' · Exclusive Listing' : p.listingType==='For Rent' ? ' · Available Now' : '');
   badge.className = 'prop-badge ' + badgeClass(p.status);
 
   // Header
@@ -428,34 +600,20 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 
   // Details table
   document.querySelector('.details-table').innerHTML = [
-    ['Property Type', p.propertyType],
-    ['Year Built',    p.yearBuilt],
-    ['Lot Size',      p.lot],
-    ['Living Area',   p.sqft + ' sqft'],
-    ['Bedrooms',      p.beds],
-    ['Bathrooms',     p.baths],
-    ['Garage',        p.garage + '-Car'],
-    ['HOA',           p.hoa],
-    ['Property Tax',  p.tax],
-    ['School District', p.school],
-    ['MLS Number',    p.mls],
-    ['Days on Market', p.daysOnMarket + ' Days'],
-    ['Listing Agent', 'Jacob Williams, TREC #12345678'],
+    ['Property Type', p.propertyType],['Year Built', p.yearBuilt],['Lot Size', p.lot],
+    ['Living Area', p.sqft + ' sqft'],['Bedrooms', p.beds],['Bathrooms', p.baths],
+    ['Garage', p.garage + '-Car'],['HOA', p.hoa],['Property Tax', p.tax],
+    ['School District', p.school],['MLS Number', p.mls],
+    ['Days on Market', p.daysOnMarket + ' Days'],['Listing Agent', 'Jacob Williams, TREC #12345678'],
   ].map(([label,value])=>`
-    <div class="detail-row">
-      <span class="detail-label">${label}</span>
-      <span class="detail-value">${value}</span>
-    </div>`).join('');
+    <div class="detail-row"><span class="detail-label">${label}</span><span class="detail-value">${value}</span></div>`).join('');
 
   // Location tab
   document.querySelector('.map-placeholder p').textContent = p.address + ', ' + p.neighborhood;
   document.querySelector('.map-nearby').innerHTML = p.nearby.map(n=>`
-    <div class="nearby-item">
-      <div class="nearby-name">${n.name}</div>
-      <div class="nearby-dist">${n.dist} away</div>
-    </div>`).join('');
+    <div class="nearby-item"><div class="nearby-name">${n.name}</div><div class="nearby-dist">${n.dist} away</div></div>`).join('');
 
-  // Similar properties (3 others, excluding current)
+  // Similar properties
   const similar = LISTINGS.filter(l=>l.id!==p.id).slice(0,3);
   document.querySelector('.sim-grid').innerHTML = similar.map((s,i)=>`
     <a href="jacob-property.html?id=${s.id}" class="lc sr sd${i+1}">
@@ -465,16 +623,9 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
       <div class="linfo">
         <div class="lprice">${s.price}</div>
         <div class="laddr">${s.address} · ${s.neighborhood}</div>
-        <div class="lspecs">
-          <span>${s.beds} Beds</span><span>·</span>
-          <span>${s.baths} Baths</span><span>·</span>
-          <span>${s.sqft} sqft</span>
-        </div>
+        <div class="lspecs"><span>${s.beds} Beds</span><span>·</span><span>${s.baths} Baths</span><span>·</span><span>${s.sqft} sqft</span></div>
       </div>
     </a>`).join('');
-
-  // Gallery image count
-  document.getElementById('gallCount').textContent = '1 / ' + p.images.length;
 
   // Re-observe scroll reveals
   document.querySelectorAll('.sr:not(.vis)').forEach(el => obs.observe(el));
