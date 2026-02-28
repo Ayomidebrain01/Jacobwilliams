@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Jacob Williams — Luxury Real Estate Houston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Object+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#fafaf8;--sky:#7ec8e3;--gold:#c9a96e;--gray:#111111;--border:rgba(255,255,255,.07);--ease:cubic-bezier(.76,0,.24,1);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
+.cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
+.cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
+.navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover,.navul a.active{color:var(--white);}.navul a:hover::after,.navul a.active::after{transform:scaleX(1);}
+.ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}.hbg span{display:block;height:1px;background:var(--white);transition:all .4s var(--ease);transform-origin:center;}.hbg span:nth-child(1){width:26px}.hbg span:nth-child(2){width:18px}.hbg span:nth-child(3){width:26px}.hbg.open span:nth-child(1){width:26px;transform:translateY(7px) rotate(45deg)}.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}.hbg.open span:nth-child(3){width:26px;transform:translateY(-7px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;justify-content:center;padding:0 8%;opacity:0;visibility:hidden;transition:all .5s var(--ease);}.mmenu.open{opacity:1;visibility:visible;}.mmenu ul{list-style:none;}.mmenu li{overflow:hidden;border-bottom:1px solid var(--border);}.mmenu a{display:block;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.04em;transform:translateY(100%);transition:transform .5s var(--ease),color .3s;}.mmenu.open a{transform:none;}.mmenu a:hover{color:var(--sky);}.mmenu li:nth-child(1) a{transition-delay:.08s}.mmenu li:nth-child(2) a{transition-delay:.13s}.mmenu li:nth-child(3) a{transition-delay:.18s}.mmenu li:nth-child(4) a{transition-delay:.23s}
+.mmenu-contact{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;}.eline{width:38px;height:1px;background:var(--gold);flex-shrink:0;}.etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:300;line-height:1.06;color:var(--white);}.stitle em{font-style:italic;color:var(--sky);}
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease);}.sr.sl{transform:translateX(-36px);}.sr.sr2{transform:translateX(36px);}.sr.sc{transform:scale(.96);}.sr.vis{opacity:1;transform:none;}.sd1{transition-delay:.1s}.sd2{transition-delay:.2s}.sd3{transition-delay:.3s}.sd4{transition-delay:.4s}
+
+/* CONTACT HERO */
+.contact-hero{padding-top:78px;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.ch-left{display:flex;flex-direction:column;justify-content:center;padding:80px 6% 80px 8%;position:relative;}
+.ch-left::before{content:'';position:absolute;top:-400px;left:-400px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(126,200,227,.04) 0%,transparent 70%);pointer-events:none;}
+.ch-vline{position:absolute;right:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,var(--sky),transparent);opacity:.2;}
+.ch-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;animation:fu .8s .3s both;}
+.ch-eline{width:38px;height:1px;background:var(--gold);}
+.ch-etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.ch-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5.5rem);font-weight:300;line-height:1.02;animation:fu .9s .4s both;}
+.ch-title em{font-style:italic;color:var(--sky);display:block;}
+.ch-desc{font-size:.9rem;line-height:1.85;color:rgba(255,255,255,.45);margin-top:24px;max-width:380px;animation:fu .9s .5s both;}
+.ch-methods{display:flex;flex-direction:column;gap:0;margin-top:52px;animation:fu .9s .6s both;}
+.cmethod{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:1px solid var(--border);transition:padding-left .3s;text-decoration:none;}
+.cmethod:hover{padding-left:10px;}
+.cmeth-ic{width:46px;height:46px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:border-color .3s,background .3s;}
+.cmethod:hover .cmeth-ic{border-color:var(--sky);background:rgba(126,200,227,.08);}
+.cmlabel{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:4px;}
+.cmval{font-size:.92rem;font-weight:700;color:var(--white);}
+.ch-availability{margin-top:40px;padding:24px 28px;border:1px solid var(--border);animation:fu .9s .7s both;}
+.av-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.av-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.av-day{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.78rem;}
+.av-day-name{color:rgba(255,255,255,.5);}
+.av-day-hours{color:var(--white);}
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* FORM SIDE */
+.ch-right{background:var(--gray);padding:80px 7%;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);}
+.form-header{margin-bottom:40px;animation:fu .9s .4s both;}
+.form-header h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--white);margin-bottom:8px;}
+.form-header p{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;}
+.cform{display:flex;flex-direction:column;gap:20px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg{display:flex;flex-direction:column;gap:7px;}
+.fg label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.fg input,.fg select,.fg textarea{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--white);font-family:'Object Sans',sans-serif;font-size:.88rem;padding:13px 0;outline:none;transition:border-color .3s;width:100%;appearance:none;resize:none;}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.18);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sky);}
+.fg select option{background:var(--black);color:var(--white);}
+.intent-btns{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.intent-btn{background:transparent;border:1px solid var(--border);color:rgba(255,255,255,.4);font-family:'Object Sans',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;cursor:none;transition:all .3s;text-align:center;}
+.intent-btn.sel,.intent-btn:hover{border-color:var(--sky);color:var(--sky);background:rgba(126,200,227,.06);}
+.fsub{display:flex;align-items:center;justify-content:space-between;gap:14px;background:transparent;border:1px solid var(--sky);color:var(--sky);font-family:'Object Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:18px 30px;cursor:none;transition:color .4s;margin-top:8px;position:relative;overflow:hidden;width:100%;}
+.fsub::before{content:'';position:absolute;inset:0;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.fsub:hover{color:var(--black);}
+.fsub:hover::before{transform:scaleX(1);}
+.fsub span,.fsub svg{position:relative;z-index:1;}
+
+/* SUCCESS STATE */
+.form-success{display:none;text-align:center;padding:60px 20px;}
+.fs-icon{font-size:3rem;margin-bottom:20px;}
+.fs-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--white);margin-bottom:12px;}
+.fs-text{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.7;}
+
+/* FAQ */
+.faq-sec{padding:120px 8%;background:#0c0c0c;}
+.faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;}
+.faq-intro{position:sticky;top:110px;}
+.faq-intro .stitle{margin-bottom:20px;}
+.faq-intro p{font-size:.88rem;line-height:1.82;color:rgba(255,255,255,.42);}
+.faq-list{display:flex;flex-direction:column;gap:1px;}
+.faq-item{border:1px solid var(--border);overflow:hidden;transition:border-color .4s;}
+.faq-item.open{border-color:rgba(126,200,227,.2);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:24px 28px;cursor:none;gap:20px;transition:background .3s;}
+.faq-q:hover{background:rgba(255,255,255,.02);}
+.faq-q-text{font-size:.9rem;font-weight:700;color:var(--white);line-height:1.4;}
+.faq-icon{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;color:rgba(255,255,255,.4);transition:all .3s;}
+.faq-item.open .faq-icon{border-color:var(--sky);color:var(--sky);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease),padding .3s;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a-inner{padding:0 28px 24px;font-size:.85rem;line-height:1.82;color:rgba(255,255,255,.45);}
+
+/* SOCIAL PROOF STRIP */
+.social-strip{background:var(--gray);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 8%;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.sp-item{text-align:center;}
+.sp-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1;color:var(--white);}
+.sp-num sup{font-size:1.1rem;color:var(--sky);}
+.sp-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* FOOTER */
+footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44px;}
+.fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.fl-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.fl-tag{font-size:.8rem;line-height:1.8;color:rgba(255,255,255,.28);max-width:220px;}
+.fc h4{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px;}.fc a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.38);transition:color .3s;}.fc a:hover{color:var(--sky);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:10px;}.fbot p{font-size:.68rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+
+@media(max-width:1024px){.contact-hero{grid-template-columns:1fr;min-height:auto;}.ch-left{padding:100px 6% 60px;}.ch-right{padding:60px 6%;border-left:none;border-top:1px solid var(--border);}.faq-layout{grid-template-columns:1fr;}.faq-intro{position:static;}}
+@media(max-width:768px){.navul{display:none}.hbg{display:flex}.mmenu{display:flex}.frow{grid-template-columns:1fr}.intent-btns{grid-template-columns:1fr 1fr}.social-strip{justify-content:center}.fg-grid{grid-template-columns:1fr 1fr;gap:32px;}.av-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){.fg-grid{grid-template-columns:1fr}.intent-btns{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav>
+  <a href="jacob-realtor.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
+  <ul class="navul">
+    <li><a href="jacob-listings.html">Listings</a></li>
+    <li><a href="jacob-about.html">About</a></li>
+    <li><a href="jacob-contact.html" class="active ncta">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="jacob-realtor.html" class="ml">Home</a></li>
+    <li><a href="jacob-listings.html" class="ml">Listings</a></li>
+    <li><a href="jacob-about.html" class="ml">About</a></li>
+    <li><a href="jacob-contact.html" class="ml">Contact</a></li>
+  </ul>
+  <p class="mmenu-contact">(713) 555-0192</p>
+</div>
+
+<!-- CONTACT HERO + FORM -->
+<section class="contact-hero">
+  <!-- LEFT INFO -->
+  <div class="ch-left">
+    <div class="ch-vline"></div>
+    <div class="ch-eyebrow"><div class="ch-eline"></div><span class="ch-etext">Let's Connect</span></div>
+    <h1 class="ch-title">Start Your<br><em>Houston Journey</em></h1>
+    <p class="ch-desc">Whether you're buying, selling, relocating, or simply curious about the market — Jacob is ready to deliver a real estate experience unlike any other.</p>
+
+    <div class="ch-methods">
+      <a href="tel:7135550192" class="cmethod">
+        <div class="cmeth-ic">📞</div>
+        <div><div class="cmlabel">Direct Line</div><div class="cmval">(713) 555-0192</div></div>
+      </a>
+      <a href="mailto:jacob@jacobwilliams.com" class="cmethod">
+        <div class="cmeth-ic">✉️</div>
+        <div><div class="cmlabel">Email</div><div class="cmval">jacob@jacobwilliams.com</div></div>
+      </a>
+      <a href="#" class="cmethod">
+        <div class="cmeth-ic">📍</div>
+        <div><div class="cmlabel">Office</div><div class="cmval">River Oaks, Houston TX 77019</div></div>
+      </a>
+      <a href="#" class="cmethod">
+        <div class="cmeth-ic">📸</div>
+        <div><div class="cmlabel">Instagram</div><div class="cmval">@jacobwilliamshomes</div></div>
+      </a>
+    </div>
+
+    <div class="ch-availability">
+      <div class="av-title">Office Hours</div>
+      <div class="av-grid">
+        <div class="av-day"><span class="av-day-name">Monday – Friday</span><span class="av-day-hours">8AM – 7PM</span></div>
+        <div class="av-day"><span class="av-day-name">Saturday</span><span class="av-day-hours">9AM – 5PM</span></div>
+        <div class="av-day"><span class="av-day-name">Sunday</span><span class="av-day-hours">By Appointment</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="ch-right">
+    <div class="form-header">
+      <h2>Send a Message</h2>
+      <p>Fill in the form and Jacob will respond within 2 business hours.</p>
+    </div>
+
+    <div id="contactForm">
+      <div class="cform">
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input type="text" placeholder="John"></div>
+          <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Email</label><input type="email" placeholder="john@example.com"></div>
+          <div class="fg"><label>Phone</label><input type="tel" placeholder="(713) 000-0000"></div>
+        </div>
+        <div class="fg">
+          <label>I Am Looking To</label>
+          <div class="intent-btns">
+            <button class="intent-btn sel" onclick="selectIntent(this)">Buy a Home</button>
+            <button class="intent-btn" onclick="selectIntent(this)">Sell a Home</button>
+            <button class="intent-btn" onclick="selectIntent(this)">Invest</button>
+            <button class="intent-btn" onclick="selectIntent(this)">Relocate to Houston</button>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Budget Range</label>
+            <select><option disabled selected>Select</option><option>Under $500K</option><option>$500K – $1M</option><option>$1M – $2M</option><option>$2M – $5M</option><option>$5M+</option></select>
+          </div>
+          <div class="fg">
+            <label>Preferred Neighborhood</label>
+            <select><option disabled selected>Select</option><option>River Oaks</option><option>The Heights</option><option>Montrose</option><option>Memorial</option><option>West University</option><option>Bellaire</option><option>Open to Suggestions</option></select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Timeline</label>
+          <select><option disabled selected>When are you looking to move?</option><option>As Soon As Possible</option><option>Within 3 Months</option><option>3 – 6 Months</option><option>6 – 12 Months</option><option>Just Exploring</option></select>
+        </div>
+        <div class="fg">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Tell Jacob what you're looking for, any specific requirements, questions, or anything else..."></textarea>
+        </div>
+        <button class="fsub" onclick="submitForm()">
+          <span>Send Message</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="fs-icon">✅</div>
+      <div class="fs-title">Message Sent!</div>
+      <p class="fs-text">Thank you for reaching out. Jacob will be in touch within 2 business hours to discuss your real estate goals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div class="social-strip">
+  <div class="sp-item sr sd1"><div class="sp-num">320<sup>+</sup></div><div class="sp-label">Homes Sold</div></div>
+  <div class="sp-item sr sd2"><div class="sp-num">12<sup>yr</sup></div><div class="sp-label">Experience</div></div>
+  <div class="sp-item sr sd3"><div class="sp-num">$1.2<sup>B</sup></div><div class="sp-label">Total Sales</div></div>
+  <div class="sp-item sr sd4"><div class="sp-num">98<sup>%</sup></div><div class="sp-label">Client Satisfaction</div></div>
+  <div class="sp-item sr"><div class="sp-num">14<sup>d</sup></div><div class="sp-label">Avg. Days to Sell</div></div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-sec">
+  <div class="faq-layout">
+    <div class="faq-intro sr sl">
+      <div class="eyebrow"><div class="eline"></div><span class="etext">FAQ</span></div>
+      <h2 class="stitle">Common<br><em>Questions</em></h2>
+      <p style="margin-top:16px;">Can't find an answer? Reach out directly — Jacob is happy to talk through any questions you have.</p>
+    </div>
+    <div class="faq-list sr">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What areas of Houston do you serve?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Jacob serves all of Greater Houston with particular expertise in River Oaks, The Heights, Montrose, Memorial, West University, Bellaire, Midtown, Katy, Sugar Land, and the surrounding suburbs. If you're looking in a specific area, reach out and Jacob will let you know his familiarity with it.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How quickly can you list and sell my home?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Jacob's average time from listing to contract is under 14 days. With a strategic pricing approach, professional photography, and a broad marketing network, many homes go under contract well before that. He'll give you a realistic timeline at your initial consultation.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Do you work with first-time buyers?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Jacob takes pride in guiding first-time buyers through every step of the process — from getting pre-approved to closing day. He explains everything clearly, answers every question patiently, and makes sure you feel confident at every stage.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What are your fees?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Real estate commissions are negotiable and vary by transaction type. Jacob offers transparent, competitive fees and will walk you through all costs clearly before you sign anything. There are no surprises in how he does business.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Can you help with relocation to Houston?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes — Jacob specializes in luxury relocation. He offers curated neighborhood tours (in-person or virtual), school district guidance, lifestyle matching, and end-to-end coordination so your move to Houston is seamless.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How do I know what my home is worth?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Jacob offers complimentary Comparative Market Analysis (CMA) for all potential sellers. This in-depth report examines recent comparable sales, current market conditions, and your home's unique features to give you a precise, data-backed valuation.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg-grid">
+    <div><div class="fl-name">Jacob Williams</div><p class="fl-tag">Houston's trusted luxury real estate advisor — helping families find exceptional homes since 2012.</p></div>
+    <div class="fc"><h4>Navigate</h4><ul><li><a href="jacob-realtor.html">Home</a></li><li><a href="jacob-listings.html">Listings</a></li><li><a href="jacob-about.html">About</a></li><li><a href="jacob-contact.html">Contact</a></li></ul></div>
+    <div class="fc"><h4>Areas</h4><ul><li><a href="#">River Oaks</a></li><li><a href="#">The Heights</a></li><li><a href="#">Montrose</a></li><li><a href="#">Memorial</a></li></ul></div>
+    <div class="fc"><h4>Connect</h4><ul><li><a href="#">(713) 555-0192</a></li><li><a href="#">jacob@jacobwilliams.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cr=document.getElementById('curRing');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.faq-q,.cmethod').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});});
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+function selectIntent(btn){document.querySelectorAll('.intent-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+function submitForm(){document.getElementById('contactForm').style.display='none';document.getElementById('formSuccess').style.display='block';}
+function toggleFaq(el){const item=el.closest('.faq-item');const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+</script>
+</body>
+</html>

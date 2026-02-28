@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Jacob Williams Luxury Real Estate Houston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Object+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#fafaf8;--sky:#7ec8e3;--sky-dark:#3aabcc;--sky-glow:rgba(126,200,227,.12);--gold:#c9a96e;--gray:#111111;--gray2:#0d0d0d;--border:rgba(255,255,255,.07);--ease:cubic-bezier(.76,0,.24,1);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+
+.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
+.cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
+.cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
+.navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover,.navul a.active{color:var(--white);}.navul a:hover::after,.navul a.active::after{transform:scaleX(1);}
+.ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}.hbg span{display:block;height:1px;background:var(--white);transition:all .4s var(--ease);transform-origin:center;}.hbg span:nth-child(1){width:26px}.hbg span:nth-child(2){width:18px}.hbg span:nth-child(3){width:26px}.hbg.open span:nth-child(1){width:26px;transform:translateY(7px) rotate(45deg)}.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}.hbg.open span:nth-child(3){width:26px;transform:translateY(-7px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;justify-content:center;padding:0 8%;opacity:0;visibility:hidden;transition:all .5s var(--ease);}.mmenu.open{opacity:1;visibility:visible;}.mmenu ul{list-style:none;}.mmenu li{overflow:hidden;border-bottom:1px solid var(--border);}.mmenu a{display:block;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.04em;transform:translateY(100%);transition:transform .5s var(--ease),color .3s;}.mmenu.open a{transform:none;}.mmenu a:hover{color:var(--sky);}.mmenu li:nth-child(1) a{transition-delay:.08s}.mmenu li:nth-child(2) a{transition-delay:.13s}.mmenu li:nth-child(3) a{transition-delay:.18s}.mmenu li:nth-child(4) a{transition-delay:.23s}.mmenu li:nth-child(5) a{transition-delay:.28s}
+.mmenu-contact{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);}
+
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;}.eline{width:38px;height:1px;background:var(--gold);flex-shrink:0;}.etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:300;line-height:1.06;color:var(--white);}.stitle em{font-style:italic;color:var(--sky);}
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease);}.sr.sl{transform:translateX(-36px);}.sr.sr2{transform:translateX(36px);}.sr.sc{transform:scale(.96);}.sr.vis{opacity:1;transform:none;}.sd1{transition-delay:.1s}.sd2{transition-delay:.2s}.sd3{transition-delay:.3s}.sd4{transition-delay:.4s}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:var(--black);padding:15px 34px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s;width:fit-content;}
+.btn-p::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.btn-p:hover::before{transform:scaleX(1);}
+.btn-p span{position:relative;z-index:1;display:flex;align-items:center;gap:10px;}
+.btn-g{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);padding:15px 34px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .35s;}.btn-g:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
+
+/* PAGE HERO */
+.page-hero{padding-top:78px;height:62vh;min-height:440px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+.page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:phi 1.8s .5s var(--ease) both;}
+@keyframes phi{to{transform:scale(1)}}
+.ph-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.92) 0%,rgba(8,8,8,.25) 55%,rgba(8,8,8,.5) 100%);}
+.ph-cnt{position:relative;z-index:2;padding:0 8% 64px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;}
+.ph-cnt .eyebrow{animation:fu .8s .8s both;}
+.ph-cnt .stitle{animation:fu .9s .9s both;}
+.ph-cnt .ph-desc{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:420px;animation:fu .9s 1s both;margin-top:16px;}
+.ph-right-stat{display:flex;flex-direction:column;gap:32px;animation:fu .9s 1.1s both;}
+.ph-stat{text-align:right;}
+.ph-stat-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;line-height:1;color:var(--white);}
+.ph-stat-num sup{font-size:1.3rem;color:var(--sky);}
+.ph-stat-lbl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;}
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* MARQUEE */
+.mbar{background:#0d0d0d;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:15px 0;overflow:hidden;display:flex;}
+.mtrack{display:flex;animation:mq 30s linear infinite;min-width:max-content;white-space:nowrap;}
+.mi{display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.ms{color:var(--gold);font-size:.45rem;}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SERVICES LIST */
+.services-main{padding:100px 8%;background:var(--black);}
+.svc-item{border-top:1px solid var(--border);display:grid;grid-template-columns:80px 1fr 1fr;gap:0;align-items:start;position:relative;overflow:hidden;transition:background .4s;}
+.svc-item:last-child{border-bottom:1px solid var(--border);}
+.svc-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--sky),var(--gold));transform:scaleY(0);transform-origin:top;transition:transform .6s var(--ease);}
+.svc-item:hover{background:rgba(126,200,227,.025);}
+.svc-item:hover::before{transform:scaleY(1);}
+.svc-num{padding:48px 0 48px 4px;font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--gold);letter-spacing:.1em;line-height:1;}
+.svc-main{padding:48px 48px 48px 24px;}
+.svc-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.8rem);font-weight:300;color:var(--white);line-height:1.06;margin-bottom:16px;}
+.svc-heading em{font-style:italic;color:var(--sky);}
+.svc-tag{display:inline-block;border:1px solid rgba(126,200,227,.35);color:var(--sky);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;margin-bottom:20px;}
+.svc-desc{font-size:.88rem;line-height:1.88;color:rgba(255,255,255,.45);max-width:440px;}
+.svc-detail{padding:48px 0;}
+.svc-points{list-style:none;display:flex;flex-direction:column;gap:0;}
+.svc-point{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);}
+.svc-point:last-child{border-bottom:none;}
+.svc-point-dot{width:5px;height:5px;background:var(--sky);border-radius:50%;flex-shrink:0;margin-top:7px;}
+.svc-point-text{font-size:.83rem;line-height:1.7;color:rgba(255,255,255,.5);}
+
+/* PROCESS */
+.process{background:var(--gray);padding:120px 8%;}
+.process-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:80px;align-items:end;}
+.process-intro p{font-size:.9rem;line-height:1.88;color:rgba(255,255,255,.45);margin-top:20px;max-width:380px;}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.pstep{background:rgba(255,255,255,.025);border:1px solid var(--border);padding:40px 32px;position:relative;transition:border-color .4s,background .4s;}
+.pstep::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sky),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.pstep:hover{border-color:rgba(126,200,227,.2);background:rgba(126,200,227,.03);}
+.pstep:hover::before{transform:scaleX(1);}
+.pstep-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(255,255,255,.06);line-height:1;margin-bottom:20px;}
+.pstep-icon{font-size:1.5rem;margin-bottom:16px;display:block;}
+.pstep-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--white);margin-bottom:10px;}
+.pstep-text{font-size:.8rem;line-height:1.78;color:rgba(255,255,255,.4);}
+
+/* COMMITMENT */
+.commitment{background:var(--black);padding:100px 8%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.commitment-visual{position:relative;}
+.commitment-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:brightness(.85);}
+.commitment-accent{position:absolute;bottom:-20px;left:-20px;width:160px;height:160px;border:1px solid var(--gold);}
+.commitment-badge{position:absolute;top:32px;right:-20px;background:rgba(8,8,8,.85);border:1px solid var(--gold);padding:22px 26px;text-align:center;backdrop-filter:blur(12px);}
+.cb-num{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--gold);line-height:1;}
+.cb-txt{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px;}
+.commitment-text .stitle{margin-bottom:24px;}
+.commitment-text p{font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.45);margin-bottom:18px;}
+.guarantee-list{margin-top:36px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.guarantee-item{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);transition:padding-left .3s;}
+.guarantee-item:hover{padding-left:10px;}
+.gi-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:border-color .3s,background .3s;}
+.guarantee-item:hover .gi-icon{border-color:var(--sky);background:var(--sky-glow);}
+.gi-title{font-size:.85rem;font-weight:700;color:var(--white);margin-bottom:2px;}
+.gi-sub{font-size:.76rem;color:rgba(255,255,255,.38);}
+
+/* AREAS */
+.areas{background:#0c0c0c;padding:100px 8%;}
+.areas-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px;}
+.areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.area-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:none;}
+.area-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
+.area-card:hover img{transform:scale(1.07);}
+.area-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 55%,transparent 100%);transition:background .4s;}
+.area-card:hover .area-ov{background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.3) 60%,transparent 100%);}
+.area-info{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;transform:translateY(10px);transition:transform .4s var(--ease);}
+.area-card:hover .area-info{transform:none;}
+.area-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:6px;}
+.area-desc{font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;opacity:0;transition:opacity .4s .1s;}
+.area-card:hover .area-desc{opacity:1;}
+
+/* TESTIMONIALS */
+.tst-strip{background:var(--gray);padding:100px 8%;}
+.tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.tc{background:rgba(255,255,255,.025);border:1px solid var(--border);padding:38px 34px;transition:border-color .4s,background .4s;}
+.tc:hover{border-color:rgba(126,200,227,.22);background:rgba(126,200,227,.035);}
+.tstars{display:flex;gap:4px;margin-bottom:22px;}.st{width:10px;height:10px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.tq{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;line-height:1.72;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:28px;}
+.tdiv{width:28px;height:1px;background:var(--gold);margin-bottom:18px;}
+.tname{font-size:.76rem;font-weight:700;color:var(--white);letter-spacing:.05em;}.tloc{font-size:.65rem;color:rgba(255,255,255,.32);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;}
+
+/* CTA BAND */
+.cta-band{background:var(--sky);padding:80px 8%;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
+.cta-band-txt{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:var(--black);line-height:1.1;}
+.cta-band-txt em{font-style:italic;}
+.btn-dark{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--white);padding:15px 34px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .35s;flex-shrink:0;}
+.btn-dark:hover{background:#1a1a1a;}
+
+footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44px;}
+.fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.fl-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.fl-tag{font-size:.8rem;line-height:1.8;color:rgba(255,255,255,.28);max-width:220px;}
+.fc h4{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px;}.fc a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.38);transition:color .3s;}.fc a:hover{color:var(--sky);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:10px;}.fbot p{font-size:.68rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+
+@media(max-width:1100px){.svc-item{grid-template-columns:60px 1fr;}.svc-detail{display:none;}.process-steps{grid-template-columns:1fr 1fr;}.commitment{grid-template-columns:1fr;}.commitment-accent,.commitment-badge{display:none;}.ph-cnt{grid-template-columns:1fr;}.ph-right-stat{display:none;}}
+@media(max-width:768px){.navul{display:none}.hbg{display:flex}.mmenu{display:flex}.svc-item{grid-template-columns:48px 1fr;}.svc-main{padding:32px 14px 32px 14px;}.areas-grid{grid-template-columns:1fr 1fr;}.tst-grid{grid-template-columns:1fr;}.process-header{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr 1fr;}.fg-grid{grid-template-columns:1fr 1fr;gap:32px;}.cta-band{flex-direction:column;}}
+@media(max-width:480px){.areas-grid{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr;}.fg-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav>
+  <a href="jacob-realtor.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
+  <ul class="navul">
+    <li><a href="jacob-services.html" class="active">Services</a></li>
+    <li><a href="jacob-listings.html">Listings</a></li>
+    <li><a href="jacob-about.html">About</a></li>
+    <li><a href="jacob-contact.html" class="ncta">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="jacob-realtor.html" class="ml">Home</a></li>
+    <li><a href="jacob-services.html" class="ml">Services</a></li>
+    <li><a href="jacob-listings.html" class="ml">Listings</a></li>
+    <li><a href="jacob-about.html" class="ml">About</a></li>
+    <li><a href="jacob-contact.html" class="ml">Contact</a></li>
+  </ul>
+  <p class="mmenu-contact">(713) 555-0192</p>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Houston Real Estate Services">
+  <div class="ph-ov"></div>
+  <div class="ph-cnt">
+    <div>
+      <div class="eyebrow"><div class="eline"></div><span class="etext">What I Offer</span></div>
+      <h1 class="stitle">Full-Service<br><em>Real Estate</em></h1>
+      <p class="ph-desc">Every transaction handled with the precision, discretion, and dedication that Houston's market demands — from search to closing.</p>
+    </div>
+    <div class="ph-right-stat">
+      <div class="ph-stat"><div class="ph-stat-num">320<sup>+</sup></div><div class="ph-stat-lbl">Homes Sold</div></div>
+      <div class="ph-stat"><div class="ph-stat-num">$1.2<sup>B</sup></div><div class="ph-stat-lbl">Total Sales Volume</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="mbar">
+  <div class="mtrack">
+    <span class="mi">Home Buying<span class="ms">◆</span></span><span class="mi">Home Selling<span class="ms">◆</span></span><span class="mi">Investment Properties<span class="ms">◆</span></span><span class="mi">Luxury Relocation<span class="ms">◆</span></span><span class="mi">Market Analysis<span class="ms">◆</span></span><span class="mi">Staging &amp; Marketing<span class="ms">◆</span></span><span class="mi">Expert Negotiation<span class="ms">◆</span></span><span class="mi">New Construction<span class="ms">◆</span></span>
+    <span class="mi">Home Buying<span class="ms">◆</span></span><span class="mi">Home Selling<span class="ms">◆</span></span><span class="mi">Investment Properties<span class="ms">◆</span></span><span class="mi">Luxury Relocation<span class="ms">◆</span></span><span class="mi">Market Analysis<span class="ms">◆</span></span><span class="mi">Staging &amp; Marketing<span class="ms">◆</span></span><span class="mi">Expert Negotiation<span class="ms">◆</span></span><span class="mi">New Construction<span class="ms">◆</span></span>
+  </div>
+</div>
+
+<!-- SERVICES LIST -->
+<section class="services-main">
+
+  <div class="svc-item sr sd1">
+    <div class="svc-num">01</div>
+    <div class="svc-main">
+      <div class="svc-tag">Buyers</div>
+      <h2 class="svc-heading">Home<br><em>Buying</em></h2>
+      <p class="svc-desc">From your first search to closing day, Jacob guides you through every decision with confidence. Deep neighborhood knowledge, aggressive negotiation, and a calm steady hand through Houston's competitive market.</p>
+    </div>
+    <div class="svc-detail">
+      <ul class="svc-points">
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Personalized neighborhood consultation &amp; lifestyle matching</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Pre-approval guidance &amp; lender introductions</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Off-market property access through private network</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Strategic offer structuring &amp; negotiation</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Inspection coordination &amp; repair negotiation</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Full closing coordination &amp; post-purchase support</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-item sr sd2">
+    <div class="svc-num">02</div>
+    <div class="svc-main">
+      <div class="svc-tag">Sellers</div>
+      <h2 class="svc-heading">Home<br><em>Selling</em></h2>
+      <p class="svc-desc">Strategic pricing, professional staging, and a bespoke marketing approach that ensures your property commands attention and achieves maximum value. Jacob's listings average just 14 days on market.</p>
+    </div>
+    <div class="svc-detail">
+      <ul class="svc-points">
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Complimentary Comparative Market Analysis (CMA)</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Professional staging consultation &amp; coordination</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Architectural photography &amp; cinematic video tour</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">MLS, Zillow, luxury network &amp; social media marketing</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Offer review strategy &amp; counteroffer negotiation</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Transaction management through to closing</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-item sr sd3">
+    <div class="svc-num">03</div>
+    <div class="svc-main">
+      <div class="svc-tag">Investors</div>
+      <h2 class="svc-heading">Investment<br><em>Properties</em></h2>
+      <p class="svc-desc">Data-driven identification of high-yield investment opportunities across Greater Houston. Whether you're after cash flow, long-term appreciation, or portfolio diversification, Jacob brings the market intelligence to make it happen.</p>
+    </div>
+    <div class="svc-detail">
+      <ul class="svc-points">
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">ROI &amp; cap rate analysis for every candidate property</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Houston growth corridor &amp; appreciation zone mapping</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Multi-family, single-family &amp; condo investment strategy</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">1031 exchange coordination &amp; tax-advantaged purchasing</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Property management referrals &amp; tenant screening guidance</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Portfolio review &amp; expansion planning</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-item sr sd4">
+    <div class="svc-num">04</div>
+    <div class="svc-main">
+      <div class="svc-tag">Relocation</div>
+      <h2 class="svc-heading">Luxury<br><em>Relocation</em></h2>
+      <p class="svc-desc">Seamless, white-glove relocation for executives, professionals, and families moving to Houston. Jacob handles every detail — from curated neighborhood tours to school enrollment guidance — so your transition is effortless.</p>
+    </div>
+    <div class="svc-detail">
+      <ul class="svc-points">
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">In-person or virtual neighborhood lifestyle tours</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">School district &amp; private school consultation</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Corporate relocation package coordination</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Temporary housing &amp; rental introductions</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Concierge introductions to local service providers</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Post-move check-ins &amp; community integration support</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-item sr">
+    <div class="svc-num">05</div>
+    <div class="svc-main">
+      <div class="svc-tag">New Builds</div>
+      <h2 class="svc-heading">New<br><em>Construction</em></h2>
+      <p class="svc-desc">Navigating new construction requires an expert advocate. Jacob represents buyers purchasing directly from builders — negotiating upgrades, reviewing contracts, and protecting your interests at every phase of the build.</p>
+    </div>
+    <div class="svc-detail">
+      <ul class="svc-points">
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Builder reputation research &amp; project vetting</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Lot selection &amp; orientation analysis</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Contract review &amp; upgrade negotiation</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Phase walkthrough inspections &amp; punch list reviews</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Builder warranty guidance &amp; post-closing support</span></li>
+        <li class="svc-point"><div class="svc-point-dot"></div><span class="svc-point-text">Design center selections &amp; cost-of-ownership analysis</span></li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header">
+    <div class="sr sl">
+      <div class="eyebrow"><div class="eline"></div><span class="etext">How It Works</span></div>
+      <h2 class="stitle">The<br><em>Process</em></h2>
+      <div class="process-intro"><p>Every great transaction starts with a conversation. Here's how Jacob turns your real estate goals into reality — clearly, efficiently, and without surprises.</p></div>
+    </div>
+    <div class="sr sr2" style="display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;gap:16px;">
+      <a href="jacob-contact.html" class="btn-p"><span>Start the Conversation <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a href="jacob-listings.html" class="btn-g">Browse Listings</a>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="pstep sr sd1"><div class="pstep-num">01</div><span class="pstep-icon">☕</span><div class="pstep-title">Consultation</div><p class="pstep-text">A no-pressure conversation to understand your goals, timeline, budget, and vision. In-person, phone, or video — your choice.</p></div>
+    <div class="pstep sr sd2"><div class="pstep-num">02</div><span class="pstep-icon">🔍</span><div class="pstep-title">Strategy</div><p class="pstep-text">A custom plan built around your specific goals — market analysis, neighborhood shortlist, or pricing strategy — tailored to you.</p></div>
+    <div class="pstep sr sd3"><div class="pstep-num">03</div><span class="pstep-icon">🤝</span><div class="pstep-title">Execution</div><p class="pstep-text">Jacob handles everything — showings, offers, negotiations, inspections, and every detail between here and the closing table.</p></div>
+    <div class="pstep sr sd4"><div class="pstep-num">04</div><span class="pstep-icon">🏠</span><div class="pstep-title">Closing &amp; Beyond</div><p class="pstep-text">Keys in hand and every question answered. Jacob stays accessible long after closing — because great relationships don't end there.</p></div>
+  </div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="commitment">
+  <div class="commitment-visual sr sl">
+    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=85&fit=crop&crop=top" alt="Jacob Williams">
+    <div class="commitment-accent"></div>
+    <div class="commitment-badge sr sc"><div class="cb-num">98%</div><div class="cb-txt">Client<br>Satisfaction</div></div>
+  </div>
+  <div class="commitment-text sr sr2">
+    <div class="eyebrow"><div class="eline"></div><span class="etext">My Commitment</span></div>
+    <h2 class="stitle">The Jacob<br><em>Guarantee</em></h2>
+    <p>I believe real estate should be transparent, efficient, and genuinely exciting. When you work with me, you get more than a transaction — you get a trusted advisor who treats your goals as his own.</p>
+    <p>Every service I offer comes backed by 12 years of Houston market knowledge, a proven negotiation track record, and a simple promise: I will always put your interests first.</p>
+    <div class="guarantee-list">
+      <div class="guarantee-item sr sd1"><div class="gi-icon">⚡</div><div><div class="gi-title">Response in 2 Hours</div><div class="gi-sub">Every call, text, and email answered same day.</div></div></div>
+      <div class="guarantee-item sr sd2"><div class="gi-icon">🔒</div><div><div class="gi-title">Total Transparency</div><div class="gi-sub">No hidden fees, no spin — just the honest truth.</div></div></div>
+      <div class="guarantee-item sr sd3"><div class="gi-icon">🎯</div><div><div class="gi-title">Focused Attention</div><div class="gi-sub">Limited client roster means you always come first.</div></div></div>
+      <div class="guarantee-item sr sd4"><div class="gi-icon">📊</div><div><div class="gi-title">Data-Driven Advice</div><div class="gi-sub">Every recommendation backed by real market data.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section class="areas">
+  <div class="areas-header">
+    <div class="sr sl">
+      <div class="eyebrow"><div class="eline"></div><span class="etext">Neighborhoods</span></div>
+      <h2 class="stitle">Areas of<br><em>Expertise</em></h2>
+    </div>
+    <a href="jacob-listings.html" class="btn-g sr">View All Listings</a>
+  </div>
+  <div class="areas-grid">
+    <div class="area-card sr sd1"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="River Oaks"><div class="area-ov"></div><div class="area-info"><div class="area-name">River Oaks</div><div class="area-desc">Houston's most prestigious address — estates, elegance, and legacy.</div></div></div>
+    <div class="area-card sr sd2"><img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=700&q=80" alt="The Heights"><div class="area-ov"></div><div class="area-info"><div class="area-name">The Heights</div><div class="area-desc">Historic charm meets modern living in one of Houston's most sought-after neighborhoods.</div></div></div>
+    <div class="area-card sr sd3"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80" alt="Memorial"><div class="area-ov"></div><div class="area-info"><div class="area-name">Memorial</div><div class="area-desc">Grand estates and family-friendly streets near Memorial Park.</div></div></div>
+    <div class="area-card sr sd1"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Montrose"><div class="area-ov"></div><div class="area-info"><div class="area-name">Montrose</div><div class="area-desc">Vibrant, walkable, and eclectic — the cultural heart of Houston.</div></div></div>
+    <div class="area-card sr sd2"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="West University"><div class="area-ov"></div><div class="area-info"><div class="area-name">West University</div><div class="area-desc">Top-rated schools and tree-lined streets in an enclave of refinement.</div></div></div>
+    <div class="area-card sr sd3"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Sugar Land"><div class="area-ov"></div><div class="area-info"><div class="area-name">Sugar Land &amp; Katy</div><div class="area-desc">Master-planned excellence — premier suburban living southwest of Houston.</div></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tst-strip">
+  <div class="sr" style="text-align:center;margin-bottom:0;">
+    <div class="eyebrow" style="justify-content:center;"><div class="eline"></div><span class="etext">Client Voices</span></div>
+    <h2 class="stitle">Proven Results</h2>
+  </div>
+  <div class="tst-grid">
+    <div class="tc sr sd1"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"Jacob's selling strategy was on another level. Our home was listed on a Tuesday and under contract by Saturday — $80K over asking."</p><div class="tdiv"></div><div class="tname">Sandra L.</div><div class="tloc">Seller — River Oaks</div></div>
+    <div class="tc sr sd2"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"As investors, we needed someone who understood numbers, not just houses. Jacob found us a property with an 8% cap rate in Midtown. Exceptional work."</p><div class="tdiv"></div><div class="tname">Kevin &amp; Priya S.</div><div class="tloc">Investors — Midtown</div></div>
+    <div class="tc sr sd3"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"We moved from Chicago knowing no one in Houston. Jacob didn't just find us a home — he helped us find a neighborhood where our whole family could thrive."</p><div class="tdiv"></div><div class="tname">The Martinez Family</div><div class="tloc">Relocation — The Heights</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band sr">
+  <div class="cta-band-txt">Ready to get started<br><em>on your terms?</em></div>
+  <a href="jacob-contact.html" class="btn-dark">Schedule a Free Consultation <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg-grid">
+    <div><div class="fl-name">Jacob Williams</div><p class="fl-tag">Houston's trusted luxury real estate advisor — helping families find exceptional homes since 2012.</p></div>
+    <div class="fc"><h4>Navigate</h4><ul><li><a href="jacob-realtor.html">Home</a></li><li><a href="jacob-services.html">Services</a></li><li><a href="jacob-listings.html">Listings</a></li><li><a href="jacob-about.html">About</a></li><li><a href="jacob-contact.html">Contact</a></li></ul></div>
+    <div class="fc"><h4>Areas</h4><ul><li><a href="#">River Oaks</a></li><li><a href="#">The Heights</a></li><li><a href="#">Montrose</a></li><li><a href="#">Memorial</a></li><li><a href="#">West University</a></li></ul></div>
+    <div class="fc"><h4>Connect</h4><ul><li><a href="#">(713) 555-0192</a></li><li><a href="#">jacob@jacobwilliams.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cr=document.getElementById('curRing');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.svc-item,.pstep,.tc,.area-card,.guarantee-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});
+});
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

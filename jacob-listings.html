@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listings — Jacob Williams Luxury Real Estate Houston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Object+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#fafaf8;--sky:#7ec8e3;--gold:#c9a96e;--gray:#111111;--gray2:#0d0d0d;--border:rgba(255,255,255,.07);--ease:cubic-bezier(.76,0,.24,1);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
+.cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
+.cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}
+.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{text-decoration:none;line-height:1;}
+.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}
+.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
+.navul{display:flex;align-items:center;gap:38px;list-style:none;}
+.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}
+.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
+.navul a:hover,.navul a.active{color:var(--white);}
+.navul a:hover::after,.navul a.active::after{transform:scaleX(1);}
+.ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}
+.ncta::after{display:none!important;}
+.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}
+.hbg span{display:block;height:1px;background:var(--white);transition:all .4s var(--ease);transform-origin:center;}
+.hbg span:nth-child(1){width:26px}.hbg span:nth-child(2){width:18px}.hbg span:nth-child(3){width:26px}
+.hbg.open span:nth-child(1){width:26px;transform:translateY(7px) rotate(45deg)}.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}.hbg.open span:nth-child(3){width:26px;transform:translateY(-7px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;justify-content:center;padding:0 8%;opacity:0;visibility:hidden;transition:all .5s var(--ease);}
+.mmenu.open{opacity:1;visibility:visible;}
+.mmenu ul{list-style:none;}
+.mmenu li{overflow:hidden;border-bottom:1px solid var(--border);}
+.mmenu a{display:block;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.04em;transform:translateY(100%);transition:transform .5s var(--ease),color .3s;}
+.mmenu.open a{transform:none;}
+.mmenu a:hover{color:var(--sky);}
+.mmenu li:nth-child(1) a{transition-delay:.08s}.mmenu li:nth-child(2) a{transition-delay:.13s}.mmenu li:nth-child(3) a{transition-delay:.18s}.mmenu li:nth-child(4) a{transition-delay:.23s}
+.mmenu-contact{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);}
+
+/* PAGE HERO */
+.page-hero{padding-top:78px;height:55vh;min-height:380px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+.page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:phi 1.8s .5s var(--ease) both;}
+@keyframes phi{to{transform:scale(1)}}
+.ph-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,rgba(8,8,8,.3) 55%,rgba(8,8,8,.55) 100%);}
+.ph-cnt{position:relative;z-index:2;padding:0 8% 56px;width:100%;}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.eline{width:38px;height:1px;background:var(--gold);flex-shrink:0;}
+.etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:300;line-height:1.06;color:var(--white);}
+.stitle em{font-style:italic;color:var(--sky);}
+.ph-cnt .eyebrow{animation:fu .8s .8s both;}
+.ph-cnt .stitle{animation:fu .9s .9s both;}
+.ph-cnt p{animation:fu .9s 1s both;font-size:.9rem;color:rgba(255,255,255,.45);margin-top:14px;max-width:480px;}
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* FILTER BAR */
+.filter-bar{background:var(--gray);border-bottom:1px solid var(--border);padding:0 8%;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;}
+.filter-bar::-webkit-scrollbar{display:none;}
+.filter-btn{flex-shrink:0;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.4);font-family:'Object Sans',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:18px 24px;cursor:none;transition:color .3s,border-color .3s;}
+.filter-btn:hover,.filter-btn.active{color:var(--sky);border-color:var(--sky);}
+
+/* SEARCH ROW */
+.search-row{background:var(--gray);padding:18px 8%;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--border);}
+.s-input{flex:1;min-width:200px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'Object Sans',sans-serif;font-size:.82rem;padding:12px 18px;outline:none;transition:border-color .3s;}
+.s-input::placeholder{color:rgba(255,255,255,.22);}
+.s-input:focus{border-color:var(--sky);}
+.s-select{background:rgba(255,255,255,.04);border:1px solid var(--border);color:rgba(255,255,255,.55);font-family:'Object Sans',sans-serif;font-size:.78rem;padding:12px 18px;outline:none;cursor:none;transition:border-color .3s;appearance:none;letter-spacing:.06em;}
+.s-select:focus{border-color:var(--sky);}
+.s-select option{background:var(--black);color:var(--white);}
+.s-btn{background:var(--sky);color:var(--black);border:none;font-family:'Object Sans',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:13px 28px;cursor:none;transition:background .3s;white-space:nowrap;}
+.s-btn:hover{background:var(--gold);}
+
+/* LISTINGS GRID */
+.listings-sec{padding:80px 8%;}
+.grid-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;flex-wrap:wrap;gap:16px;}
+.grid-count{font-size:.78rem;color:rgba(255,255,255,.4);letter-spacing:.08em;}
+.grid-views{display:flex;gap:8px;}
+.vbtn{background:none;border:1px solid var(--border);color:rgba(255,255,255,.35);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all .3s;font-size:.9rem;}
+.vbtn.active,.vbtn:hover{border-color:var(--sky);color:var(--sky);}
+
+.lg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;transition:all .4s;}
+.lg.list-view{grid-template-columns:1fr;}
+
+/* Card — Grid */
+.lc{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:none;text-decoration:none;display:block;}
+.lc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
+.lc:hover img{transform:scale(1.06);}
+.lc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 50%,transparent 100%);transition:background .4s;}
+.lc:hover .lc-ov{background:linear-gradient(to top,rgba(0,0,0,.94) 0%,rgba(0,0,0,.25) 55%,transparent 100%);}
+.lbadge{position:absolute;top:18px;left:18px;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px;}
+.lbadge.sold{border-color:rgba(201,169,110,.55);color:var(--gold);}
+.lbadge.pending{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.6);}
+.linfo{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;transform:translateY(10px);transition:transform .4s var(--ease);}
+.lc:hover .linfo{transform:none;}
+.lprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;color:var(--white);line-height:1;margin-bottom:7px;}
+.laddr{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.04em;margin-bottom:14px;}
+.lspecs{display:flex;gap:14px;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);opacity:0;transition:opacity .4s .1s;}
+.lc:hover .lspecs{opacity:1;}
+
+/* Card — List View */
+.lg.list-view .lc{aspect-ratio:unset;display:grid;grid-template-columns:340px 1fr;height:220px;}
+.lg.list-view .lc img{height:100%;transform:none;}
+.lg.list-view .lc:hover img{transform:scale(1.04);}
+.lg.list-view .lc-ov{background:linear-gradient(to right,transparent 60%,rgba(8,8,8,.95) 100%);}
+.lg.list-view .linfo{position:static;transform:none;padding:32px 36px;background:var(--gray);display:flex;flex-direction:column;justify-content:center;}
+.lg.list-view .lprice{font-size:2.2rem;margin-bottom:10px;}
+.lg.list-view .lspecs{opacity:1;gap:20px;margin-top:16px;}
+.lg.list-view .lc:hover .lc-ov{background:linear-gradient(to right,transparent 60%,rgba(8,8,8,.95) 100%);}
+
+/* PAGINATION */
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:80px;}
+.ppage{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:rgba(255,255,255,.4);font-size:.78rem;cursor:none;transition:all .3s;text-decoration:none;}
+.ppage:hover,.ppage.active{border-color:var(--sky);color:var(--sky);}
+.pnext{display:flex;align-items:center;gap:8px;border:1px solid var(--border);color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;cursor:none;transition:all .3s;text-decoration:none;margin-left:8px;}
+.pnext:hover{border-color:var(--sky);color:var(--sky);}
+
+/* FEATURED BANNER */
+.featured-banner{margin:0 8% 80px;border:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative;}
+.fb-img{position:relative;overflow:hidden;min-height:380px;}
+.fb-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
+.featured-banner:hover .fb-img img{transform:scale(1.04);}
+.fb-badge{position:absolute;top:24px;left:24px;background:var(--sky);color:var(--black);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:6px 14px;}
+.fb-content{padding:56px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--gray);}
+.fb-tag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.fb-price{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;line-height:1;color:var(--white);margin-bottom:12px;}
+.fb-addr{font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:28px;}
+.fb-specs{display:flex;gap:24px;margin-bottom:36px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;}
+.fb-spec span{display:block;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:3px;}
+
+/* FOOTER */
+footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44px;}
+.fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.fl-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.fl-tag{font-size:.8rem;line-height:1.8;color:rgba(255,255,255,.28);max-width:220px;}
+.fc h4{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.fc a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.38);transition:color .3s;}
+.fc a:hover{color:var(--sky);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:10px;}
+.fbot p{font-size:.68rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+
+/* SCROLL REVEAL */
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.sr.sl{transform:translateX(-36px);}
+.sr.vis{opacity:1;transform:none;}
+.sd1{transition-delay:.1s}.sd2{transition-delay:.2s}.sd3{transition-delay:.3s}
+
+@media(max-width:1024px){.lg{grid-template-columns:1fr 1fr;}.lg.list-view{grid-template-columns:1fr;}.featured-banner{grid-template-columns:1fr;}.fb-img{min-height:280px;}}
+@media(max-width:768px){.navul{display:none}.hbg{display:flex}.mmenu{display:flex}.lg{grid-template-columns:1fr}.lg.list-view .lc{grid-template-columns:1fr;height:auto}.lg.list-view .lc img{height:220px;}.lg.list-view .linfo{padding:24px}.search-row{flex-direction:column}.s-input,.s-select{width:100%}.listings-sec{padding:60px 5%}.fg-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:480px){.fg-grid{grid-template-columns:1fr}.featured-banner{margin:0 5% 60px}}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav>
+  <a href="jacob-realtor.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
+  <ul class="navul">
+    <li><a href="jacob-services.html">Services</a></li>
+    <li><a href="jacob-listings.html" class="active">Listings</a></li>
+    <li><a href="jacob-about.html">About</a></li>
+    <li><a href="jacob-contact.html" class="ncta">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="jacob-realtor.html" class="ml">Home</a></li>
+    <li><a href="jacob-listings.html" class="ml">Listings</a></li>
+    <li><a href="jacob-about.html" class="ml">About</a></li>
+    <li><a href="jacob-contact.html" class="ml">Contact</a></li>
+  </ul>
+  <p class="mmenu-contact">(713) 555-0192</p>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80" alt="Houston Luxury Properties">
+  <div class="ph-ov"></div>
+  <div class="ph-cnt">
+    <div class="eyebrow"><div class="eline"></div><span class="etext">Properties</span></div>
+    <h1 class="stitle">Houston's Finest<br><em>Listings</em></h1>
+    <p>Curated properties across Houston's most prestigious neighborhoods.</p>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="mbar" style="background:#0d0d0d;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:15px 0;overflow:hidden;display:flex;">
+  <div class="mtrack" style="display:flex;animation:mq 28s linear infinite;min-width:max-content;white-space:nowrap;">
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">River Oaks<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">The Heights<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Montrose<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Memorial<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">West University<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Bellaire<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">River Oaks<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">The Heights<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Montrose<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Memorial<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">West University<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+    <span class="mi" style="display:flex;align-items:center;gap:18px;padding:0 28px;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);">Bellaire<span class="ms" style="color:var(--gold);font-size:.45rem;">◆</span></span>
+  </div>
+</div>
+<style>@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}</style>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="setFilter(this,'all')">All Properties</button>
+  <button class="filter-btn" onclick="setFilter(this,'sale')">For Sale</button>
+  <button class="filter-btn" onclick="setFilter(this,'pending')">Pending</button>
+  <button class="filter-btn" onclick="setFilter(this,'sold')">Recently Sold</button>
+  <button class="filter-btn" onclick="setFilter(this,'luxury')">Luxury</button>
+  <button class="filter-btn" onclick="setFilter(this,'investment')">Investment</button>
+</div>
+
+<!-- SEARCH ROW -->
+<div class="search-row">
+  <input class="s-input" type="text" placeholder="Search by neighborhood, street, or ZIP code...">
+  <select class="s-select"><option>Any Price</option><option>Under $500K</option><option>$500K – $1M</option><option>$1M – $2M</option><option>$2M+</option></select>
+  <select class="s-select"><option>Any Beds</option><option>2+ Beds</option><option>3+ Beds</option><option>4+ Beds</option><option>5+ Beds</option></select>
+  <select class="s-select"><option>Any Area</option><option>River Oaks</option><option>The Heights</option><option>Montrose</option><option>Memorial</option><option>Bellaire</option></select>
+  <button class="s-btn">Search</button>
+</div>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner sr">
+  <div class="fb-img">
+    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80" alt="Featured Property">
+    <div class="fb-badge">Featured Property</div>
+  </div>
+  <div class="fb-content">
+    <div class="fb-tag">Exclusive Listing · River Oaks</div>
+    <div class="fb-price">$3,850,000</div>
+    <div class="fb-addr">1204 Kirby Drive, River Oaks, Houston TX 77019</div>
+    <div class="fb-specs">
+      <div><span>6</span>Bedrooms</div>
+      <div><span>5.5</span>Bathrooms</div>
+      <div><span>6,200</span>Sq. Ft.</div>
+      <div><span>0.4</span>Acres</div>
+    </div>
+    <a href="jacob-property.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:var(--black);padding:14px 30px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s;width:fit-content;">
+      <span style="position:relative;z-index:1;display:flex;align-items:center;gap:10px;">View Property
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+  </div>
+</div>
+
+<!-- LISTINGS GRID -->
+<section class="listings-sec">
+  <div class="grid-header sr">
+    <span class="grid-count">Showing 9 of 24 properties</span>
+    <div class="grid-views">
+      <button class="vbtn active" id="gridBtn" title="Grid view">⊞</button>
+      <button class="vbtn" id="listBtn" title="List view">☰</button>
+    </div>
+  </div>
+
+  <div class="lg" id="listGrid">
+    <a href="jacob-property.html" class="lc sr sd1">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="River Oaks">
+      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
+      <div class="linfo"><div class="lprice">$1,450,000</div><div class="laddr">4812 Shadyside Ln · River Oaks</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,800 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd2">
+      <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=700&q=80" alt="Heights">
+      <div class="lc-ov"></div><div class="lbadge">New</div>
+      <div class="linfo"><div class="lprice">$975,000</div><div class="laddr">2203 Rutland St · The Heights</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2 Baths</span><span>·</span><span>2,100 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd3">
+      <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80" alt="Memorial">
+      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
+      <div class="linfo"><div class="lprice">$2,100,000</div><div class="laddr">7701 Hunters Creek Dr · Memorial</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4 Baths</span><span>·</span><span>4,200 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd1">
+      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Montrose">
+      <div class="lc-ov"></div><div class="lbadge pending">Pending</div>
+      <div class="linfo"><div class="lprice">$785,000</div><div class="laddr">1822 Westheimer Rd · Montrose</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2.5 Baths</span><span>·</span><span>1,950 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd2">
+      <img src="https://images.unsplash.com/photo-1598228723793-52759bba239c?w=700&q=80" alt="Bellaire">
+      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
+      <div class="linfo"><div class="lprice">$1,175,000</div><div class="laddr">5509 Maple St · Bellaire</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3 Baths</span><span>·</span><span>2,800 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd3">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="West University">
+      <div class="lc-ov"></div><div class="lbadge sold">Sold</div>
+      <div class="linfo"><div class="lprice">$2,450,000</div><div class="laddr">3301 Rice Blvd · West University</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4.5 Baths</span><span>·</span><span>4,600 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd1">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="Katy">
+      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
+      <div class="linfo"><div class="lprice">$549,000</div><div class="laddr">420 Cinco Ranch Blvd · Katy</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3 Baths</span><span>·</span><span>2,400 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd2">
+      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Sugar Land">
+      <div class="lc-ov"></div><div class="lbadge">New</div>
+      <div class="linfo"><div class="lprice">$895,000</div><div class="laddr">1609 First Colony Blvd · Sugar Land</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,100 sqft</span></div></div>
+    </a>
+    <a href="jacob-property.html" class="lc sr sd3">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Midtown">
+      <div class="lc-ov"></div><div class="lbadge pending">Pending</div>
+      <div class="linfo"><div class="lprice">$665,000</div><div class="laddr">2200 Main St · Midtown</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2 Baths</span><span>·</span><span>1,800 sqft</span></div></div>
+    </a>
+  </div>
+
+  <div class="pagination sr">
+    <a href="#" class="ppage active">1</a>
+    <a href="#" class="ppage">2</a>
+    <a href="#" class="ppage">3</a>
+    <a href="#" class="pnext">Next <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg-grid">
+    <div><div class="fl-name">Jacob Williams</div><p class="fl-tag">Houston's trusted luxury real estate advisor — helping families find exceptional homes since 2012.</p></div>
+    <div class="fc"><h4>Navigate</h4><ul><li><a href="jacob-realtor.html">Home</a></li><li><a href="jacob-listings.html">Listings</a></li><li><a href="jacob-about.html">About</a></li><li><a href="jacob-contact.html">Contact</a></li></ul></div>
+    <div class="fc"><h4>Areas</h4><ul><li><a href="#">River Oaks</a></li><li><a href="#">The Heights</a></li><li><a href="#">Montrose</a></li><li><a href="#">Memorial</a></li></ul></div>
+    <div class="fc"><h4>Connect</h4><ul><li><a href="#">(713) 555-0192</a></li><li><a href="#">jacob@jacobwilliams.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cr=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.lc').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});});
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+function setFilter(btn,f){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+document.getElementById('gridBtn').addEventListener('click',function(){this.classList.add('active');document.getElementById('listBtn').classList.remove('active');document.getElementById('listGrid').classList.remove('list-view');});
+document.getElementById('listBtn').addEventListener('click',function(){this.classList.add('active');document.getElementById('gridBtn').classList.remove('active');document.getElementById('listGrid').classList.add('list-view');});
+</script>
+</body>
+</html>

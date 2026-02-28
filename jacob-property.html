@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1204 Kirby Drive — Jacob Williams Luxury Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Object+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#fafaf8;--sky:#7ec8e3;--gold:#c9a96e;--gray:#111111;--gray2:#0d0d0d;--border:rgba(255,255,255,.07);--ease:cubic-bezier(.76,0,.24,1);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
+.cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
+.cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
+.navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover{color:var(--white);}.navul a:hover::after{transform:scaleX(1);}
+.ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}.hbg span{display:block;height:1px;background:var(--white);transition:all .4s var(--ease);transform-origin:center;}.hbg span:nth-child(1){width:26px}.hbg span:nth-child(2){width:18px}.hbg span:nth-child(3){width:26px}.hbg.open span:nth-child(1){width:26px;transform:translateY(7px) rotate(45deg)}.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}.hbg.open span:nth-child(3){width:26px;transform:translateY(-7px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;justify-content:center;padding:0 8%;opacity:0;visibility:hidden;transition:all .5s var(--ease);}.mmenu.open{opacity:1;visibility:visible;}.mmenu ul{list-style:none;}.mmenu li{overflow:hidden;border-bottom:1px solid var(--border);}.mmenu a{display:block;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.04em;transform:translateY(100%);transition:transform .5s var(--ease),color .3s;}.mmenu.open a{transform:none;}.mmenu a:hover{color:var(--sky);}.mmenu li:nth-child(1) a{transition-delay:.08s}.mmenu li:nth-child(2) a{transition-delay:.13s}.mmenu li:nth-child(3) a{transition-delay:.18s}.mmenu li:nth-child(4) a{transition-delay:.23s}
+.mmenu-contact{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;}.eline{width:38px;height:1px;background:var(--gold);flex-shrink:0;}.etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease);}.sr.sl{transform:translateX(-36px);}.sr.sr2{transform:translateX(36px);}.sr.sc{transform:scale(.96);}.sr.vis{opacity:1;transform:none;}.sd1{transition-delay:.1s}.sd2{transition-delay:.2s}.sd3{transition-delay:.3s}.sd4{transition-delay:.4s}
+
+/* GALLERY HERO */
+.gallery-hero{padding-top:78px;height:88vh;min-height:580px;position:relative;overflow:hidden;display:flex;}
+.gallery-main{flex:1;position:relative;overflow:hidden;}
+.gallery-main img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);animation:phi 1.8s .5s var(--ease) both;transition:opacity .5s;}
+@keyframes phi{to{transform:scale(1)}}
+.gallery-strip{width:160px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;scrollbar-width:none;}
+.gallery-strip::-webkit-scrollbar{display:none;}
+.gallery-thumb{flex-shrink:0;height:calc(88vh/4 - 1.5px);min-height:100px;overflow:hidden;cursor:none;position:relative;}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease);}
+.gallery-thumb:hover img{transform:scale(1.06);}
+.gallery-thumb.active::after{content:'';position:absolute;inset:0;border:2px solid var(--sky);}
+.gallery-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.7) 0%,transparent 40%);pointer-events:none;}
+.gallery-count{position:absolute;bottom:28px;right:28px;font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.5);background:rgba(8,8,8,.5);padding:6px 14px;backdrop-filter:blur(8px);}
+.gallery-fullscreen{position:absolute;bottom:28px;left:28px;background:rgba(8,8,8,.5);border:1px solid var(--border);color:rgba(255,255,255,.6);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 18px;cursor:none;backdrop-filter:blur(8px);transition:all .3s;}
+.gallery-fullscreen:hover{border-color:var(--sky);color:var(--sky);}
+
+/* BREADCRUMB */
+.breadcrumb{padding:20px 8%;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);background:var(--gray);}
+.breadcrumb a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .3s;}
+.breadcrumb a:hover{color:var(--sky);}
+.breadcrumb span{font-size:.68rem;color:rgba(255,255,255,.2);}
+.breadcrumb .current{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+
+/* PROPERTY LAYOUT */
+.property-layout{display:grid;grid-template-columns:1fr 380px;gap:2px;align-items:start;}
+
+/* LEFT COLUMN */
+.prop-left{padding:72px 6% 72px 8%;}
+.prop-header{margin-bottom:52px;}
+.prop-badge{display:inline-block;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;margin-bottom:20px;}
+.prop-price{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5rem);font-weight:300;line-height:1;color:var(--white);margin-bottom:12px;}
+.prop-address{font-size:1rem;color:rgba(255,255,255,.55);letter-spacing:.04em;margin-bottom:24px;}
+.prop-quick-specs{display:flex;gap:0;border:1px solid var(--border);margin-bottom:0;}
+.pqs{flex:1;padding:20px 24px;border-right:1px solid var(--border);text-align:center;}
+.pqs:last-child{border-right:none;}
+.pqs-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--white);line-height:1;display:block;}
+.pqs-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;display:block;}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:52px;margin-bottom:40px;}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.4);font-family:'Object Sans',sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:16px 28px;cursor:none;transition:color .3s,border-color .3s;}
+.tab:hover,.tab.active{color:var(--sky);border-color:var(--sky);}
+
+.tab-panel{display:none;}.tab-panel.active{display:block;}
+
+/* DESCRIPTION */
+.prop-desc p{font-size:.92rem;line-height:1.9;color:rgba(255,255,255,.5);margin-bottom:18px;}
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.feat{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);}
+.feat-dot{width:6px;height:6px;background:var(--sky);border-radius:50%;flex-shrink:0;}
+.feat-text{font-size:.84rem;color:rgba(255,255,255,.6);}
+
+/* DETAILS TABLE */
+.details-table{display:flex;flex-direction:column;gap:0;}
+.detail-row{display:grid;grid-template-columns:1fr 1fr;padding:16px 0;border-bottom:1px solid var(--border);}
+.detail-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.detail-value{font-size:.88rem;color:var(--white);font-weight:700;}
+
+/* MAP PLACEHOLDER */
+.map-placeholder{background:var(--gray);border:1px solid var(--border);height:340px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,.3);}
+.map-placeholder .map-icon{font-size:2rem;}
+.map-placeholder p{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;}
+.map-nearby{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.nearby-item{padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--border);}
+.nearby-name{font-size:.8rem;font-weight:700;color:var(--white);margin-bottom:2px;}
+.nearby-dist{font-size:.7rem;color:rgba(255,255,255,.35);}
+
+/* RIGHT COLUMN — STICKY CARD */
+.prop-right{position:sticky;top:78px;background:var(--gray);border-left:1px solid var(--border);padding:48px 36px;height:fit-content;}
+.contact-card-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:6px;}
+.contact-card-sub{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.08em;margin-bottom:32px;}
+.agent-row{display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:28px;}
+.agent-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.agent-avatar img{width:100%;height:100%;object-fit:cover;}
+.agent-name{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:2px;}
+.agent-lic{font-size:.68rem;color:rgba(255,255,255,.35);letter-spacing:.06em;}
+.cc-form{display:flex;flex-direction:column;gap:14px;}
+.cc-input,.cc-select,.cc-textarea{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--white);font-family:'Object Sans',sans-serif;font-size:.85rem;padding:11px 0;outline:none;transition:border-color .3s;width:100%;appearance:none;resize:none;}
+.cc-input::placeholder,.cc-textarea::placeholder{color:rgba(255,255,255,.2);}
+.cc-input:focus,.cc-select:focus,.cc-textarea:focus{border-color:var(--sky);}
+.cc-select option{background:var(--black);color:var(--white);}
+.cc-submit{background:var(--sky);color:var(--black);border:none;font-family:'Object Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:16px 28px;cursor:none;transition:background .3s;width:100%;margin-top:4px;position:relative;overflow:hidden;}
+.cc-submit::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.cc-submit:hover::before{transform:scaleX(1);}
+.cc-submit span{position:relative;z-index:1;}
+.cc-phone{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s;}
+.cc-phone:hover{color:var(--sky);}
+.cc-share{display:flex;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
+.cc-share-btn{flex:1;background:transparent;border:1px solid var(--border);color:rgba(255,255,255,.4);font-family:'Object Sans',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 0;cursor:none;transition:all .3s;text-align:center;}
+.cc-share-btn:hover{border-color:var(--sky);color:var(--sky);}
+
+/* SIMILAR PROPERTIES */
+.similar{padding:80px 8%;background:#0c0c0c;}
+.sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;}
+.lc{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:none;text-decoration:none;display:block;}
+.lc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
+.lc:hover img{transform:scale(1.06);}
+.lc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 50%,transparent 100%);}
+.lbadge{position:absolute;top:18px;left:18px;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px;}
+.linfo{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;transform:translateY(10px);transition:transform .4s var(--ease);}
+.lc:hover .linfo{transform:none;}
+.lprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;color:var(--white);line-height:1;margin-bottom:7px;}
+.laddr{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.04em;margin-bottom:14px;}
+.lspecs{display:flex;gap:14px;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);opacity:0;transition:opacity .4s .1s;}
+.lc:hover .lspecs{opacity:1;}
+
+/* FOOTER */
+footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44px;}
+.fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.fl-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.fl-tag{font-size:.8rem;line-height:1.8;color:rgba(255,255,255,.28);max-width:220px;}
+.fc h4{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px;}.fc a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.38);transition:color .3s;}.fc a:hover{color:var(--sky);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:10px;}.fbot p{font-size:.68rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+
+@media(max-width:1100px){.property-layout{grid-template-columns:1fr;}.prop-right{position:static;border-left:none;border-top:1px solid var(--border);}.gallery-strip{display:none;}.gallery-hero{height:60vw;min-height:320px;}}
+@media(max-width:768px){.navul{display:none}.hbg{display:flex}.mmenu{display:flex}.sim-grid{grid-template-columns:1fr}.prop-quick-specs{flex-wrap:wrap;}.pqs{min-width:50%;}.features-grid{grid-template-columns:1fr}.map-nearby{grid-template-columns:1fr}.fg-grid{grid-template-columns:1fr 1fr;gap:32px;}.prop-left{padding:48px 5%}}
+@media(max-width:480px){.fg-grid{grid-template-columns:1fr}.prop-quick-specs{grid-template-columns:1fr 1fr;display:grid;}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav>
+  <a href="jacob-realtor.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
+  <ul class="navul">
+    <li><a href="jacob-listings.html">Listings</a></li>
+    <li><a href="jacob-about.html">About</a></li>
+    <li><a href="jacob-contact.html" class="ncta">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="jacob-realtor.html" class="ml">Home</a></li>
+    <li><a href="jacob-listings.html" class="ml">Listings</a></li>
+    <li><a href="jacob-about.html" class="ml">About</a></li>
+    <li><a href="jacob-contact.html" class="ml">Contact</a></li>
+  </ul>
+  <p class="mmenu-contact">(713) 555-0192</p>
+</div>
+
+<!-- GALLERY HERO -->
+<div class="gallery-hero">
+  <div class="gallery-main">
+    <img id="mainImg" src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1400&q=80" alt="1204 Kirby Drive">
+    <div class="gallery-ov"></div>
+    <button class="gallery-fullscreen">View All Photos</button>
+    <div class="gallery-count" id="gallCount">1 / 5</div>
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-thumb active" onclick="setImg(0,this)"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=80" alt=""></div>
+    <div class="gallery-thumb" onclick="setImg(1,this)"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&q=80" alt=""></div>
+    <div class="gallery-thumb" onclick="setImg(2,this)"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=80" alt=""></div>
+    <div class="gallery-thumb" onclick="setImg(3,this)"><img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=400&q=80" alt=""></div>
+    <div class="gallery-thumb" onclick="setImg(4,this)"><img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=400&q=80" alt=""></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="jacob-realtor.html">Home</a>
+  <span>/</span>
+  <a href="jacob-listings.html">Listings</a>
+  <span>/</span>
+  <span class="current">1204 Kirby Drive, River Oaks</span>
+</div>
+
+<!-- PROPERTY LAYOUT -->
+<div class="property-layout">
+  <!-- LEFT -->
+  <div class="prop-left">
+    <div class="prop-header sr">
+      <div class="prop-badge">For Sale · Exclusive Listing</div>
+      <div class="prop-price">$3,850,000</div>
+      <div class="prop-address">1204 Kirby Drive, River Oaks, Houston TX 77019</div>
+      <div class="prop-quick-specs">
+        <div class="pqs"><span class="pqs-num">6</span><span class="pqs-label">Bedrooms</span></div>
+        <div class="pqs"><span class="pqs-num">5.5</span><span class="pqs-label">Bathrooms</span></div>
+        <div class="pqs"><span class="pqs-num">6,200</span><span class="pqs-label">Sq. Ft.</span></div>
+        <div class="pqs"><span class="pqs-num">0.4</span><span class="pqs-label">Acres</span></div>
+        <div class="pqs"><span class="pqs-num">3</span><span class="pqs-label">Car Garage</span></div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs sr">
+      <button class="tab active" onclick="openTab(this,'desc')">Description</button>
+      <button class="tab" onclick="openTab(this,'features')">Features</button>
+      <button class="tab" onclick="openTab(this,'details')">Details</button>
+      <button class="tab" onclick="openTab(this,'location')">Location</button>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="tab-panel active" id="desc">
+      <div class="prop-desc sr">
+        <p>Welcome to 1204 Kirby Drive — an exceptional estate nestled in the heart of River Oaks, Houston's most prestigious neighborhood. This meticulously maintained home blends timeless architectural elegance with contemporary luxury finishes throughout its expansive 6,200 square feet.</p>
+        <p>The grand entry foyer sets the tone with soaring ceilings, custom millwork, and rich hardwood floors that flow seamlessly through the main living areas. A chef's kitchen features professional-grade appliances, quartzite countertops, and an oversized island perfect for entertaining. The adjacent family room opens to a covered terrace overlooking the resort-style pool and landscaped gardens.</p>
+        <p>The primary suite is a private sanctuary featuring a spa-like bathroom with a freestanding soaking tub, steam shower, and dual walk-in closets. Five additional en-suite bedrooms accommodate family and guests in total comfort. A third-floor media room, game room, and private study round out this extraordinary offering.</p>
+        <p>Located minutes from Houston's finest dining, shopping, and cultural institutions, this is a rare opportunity to acquire a truly exceptional River Oaks estate.</p>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="tab-panel" id="features">
+      <div class="features-grid sr">
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Gourmet chef's kitchen</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Resort-style pool &amp; spa</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Primary suite with spa bath</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">3-car climate-controlled garage</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Home theater &amp; media room</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Smart home automation</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Covered outdoor terrace</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Wine cellar &amp; tasting room</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Private study &amp; library</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Whole-home generator</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Custom millwork throughout</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Quartzite &amp; marble finishes</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Landscaped .4 acre lot</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Service quarters / guest suite</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">River Oaks school district</div></div>
+        <div class="feat"><div class="feat-dot"></div><div class="feat-text">Steps from River Oaks Country Club</div></div>
+      </div>
+    </div>
+
+    <!-- DETAILS -->
+    <div class="tab-panel" id="details">
+      <div class="details-table sr">
+        <div class="detail-row"><span class="detail-label">Property Type</span><span class="detail-value">Single Family Home</span></div>
+        <div class="detail-row"><span class="detail-label">Year Built</span><span class="detail-value">2018</span></div>
+        <div class="detail-row"><span class="detail-label">Lot Size</span><span class="detail-value">0.40 Acres (17,424 sqft)</span></div>
+        <div class="detail-row"><span class="detail-label">Living Area</span><span class="detail-value">6,200 sqft</span></div>
+        <div class="detail-row"><span class="detail-label">Bedrooms</span><span class="detail-value">6 (all en-suite)</span></div>
+        <div class="detail-row"><span class="detail-label">Bathrooms</span><span class="detail-value">5 Full, 1 Half</span></div>
+        <div class="detail-row"><span class="detail-label">Garage</span><span class="detail-value">3-Car Attached</span></div>
+        <div class="detail-row"><span class="detail-label">Pool</span><span class="detail-value">Yes — Resort Style with Spa</span></div>
+        <div class="detail-row"><span class="detail-label">HOA</span><span class="detail-value">$450 / month</span></div>
+        <div class="detail-row"><span class="detail-label">Property Tax</span><span class="detail-value">~$72,000 / year (est.)</span></div>
+        <div class="detail-row"><span class="detail-label">School District</span><span class="detail-value">Houston ISD (River Oaks Elementary)</span></div>
+        <div class="detail-row"><span class="detail-label">MLS Number</span><span class="detail-value">HAR-2025-14892</span></div>
+        <div class="detail-row"><span class="detail-label">Days on Market</span><span class="detail-value">3 Days</span></div>
+        <div class="detail-row"><span class="detail-label">Listing Agent</span><span class="detail-value">Jacob Williams, TREC #12345678</span></div>
+      </div>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="tab-panel" id="location">
+      <div class="map-placeholder sr">
+        <div class="map-icon">📍</div>
+        <p>1204 Kirby Drive, River Oaks</p>
+      </div>
+      <div class="map-nearby sr">
+        <div class="nearby-item"><div class="nearby-name">River Oaks Country Club</div><div class="nearby-dist">0.3 mi away</div></div>
+        <div class="nearby-item"><div class="nearby-name">River Oaks Elementary</div><div class="nearby-dist">0.4 mi away</div></div>
+        <div class="nearby-item"><div class="nearby-name">The Galleria</div><div class="nearby-dist">2.1 mi away</div></div>
+        <div class="nearby-item"><div class="nearby-name">Texas Medical Center</div><div class="nearby-dist">4.5 mi away</div></div>
+        <div class="nearby-item"><div class="nearby-name">Downtown Houston</div><div class="nearby-dist">4.8 mi away</div></div>
+        <div class="nearby-item"><div class="nearby-name">Bush Intercontinental Airport</div><div class="nearby-dist">24 mi away</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — STICKY CONTACT CARD -->
+  <div class="prop-right">
+    <div class="contact-card-title">Interested?</div>
+    <div class="contact-card-sub">Schedule a private showing today</div>
+    <div class="agent-row">
+      <div class="agent-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&fit=crop&crop=top" alt="Jacob Williams"></div>
+      <div>
+        <div class="agent-name">Jacob Williams</div>
+        <div class="agent-lic">Licensed Realtor · TREC #12345678</div>
+      </div>
+    </div>
+    <div class="cc-form">
+      <input class="cc-input" type="text" placeholder="Your Name">
+      <input class="cc-input" type="email" placeholder="Email Address">
+      <input class="cc-input" type="tel" placeholder="Phone Number">
+      <select class="cc-select"><option disabled selected>Preferred Showing Time</option><option>Morning (8AM – 12PM)</option><option>Afternoon (12PM – 5PM)</option><option>Evening (5PM – 7PM)</option></select>
+      <textarea class="cc-textarea" rows="3" placeholder="Any questions or notes?"></textarea>
+      <button class="cc-submit"><span>Request a Showing</span></button>
+    </div>
+    <a href="tel:7135550192" class="cc-phone">📞 (713) 555-0192</a>
+    <div class="cc-share">
+      <button class="cc-share-btn">Share</button>
+      <button class="cc-share-btn">Save</button>
+      <button class="cc-share-btn">Print</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIMILAR PROPERTIES -->
+<section class="similar">
+  <div class="sr">
+    <div class="eyebrow"><div class="eline"></div><span class="etext">More Listings</span></div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.06;color:var(--white);">Similar <em style="font-style:italic;color:var(--sky);">Properties</em></h2>
+  </div>
+  <div class="sim-grid">
+    <a href="jacob-property.html" class="lc sr sd1"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt=""><div class="lc-ov"></div><div class="lbadge">For Sale</div><div class="linfo"><div class="lprice">$1,450,000</div><div class="laddr">4812 Shadyside Ln · River Oaks</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,800 sqft</span></div></div></a>
+    <a href="jacob-property.html" class="lc sr sd2"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt=""><div class="lc-ov"></div><div class="lbadge">For Sale</div><div class="linfo"><div class="lprice">$2,450,000</div><div class="laddr">3301 Rice Blvd · West University</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4.5 Baths</span><span>·</span><span>4,600 sqft</span></div></div></a>
+    <a href="jacob-property.html" class="lc sr sd3"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80" alt=""><div class="lc-ov"></div><div class="lbadge">New</div><div class="linfo"><div class="lprice">$2,100,000</div><div class="laddr">7701 Hunters Creek Dr · Memorial</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4 Baths</span><span>·</span><span>4,200 sqft</span></div></div></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg-grid">
+    <div><div class="fl-name">Jacob Williams</div><p class="fl-tag">Houston's trusted luxury real estate advisor — helping families find exceptional homes since 2012.</p></div>
+    <div class="fc"><h4>Navigate</h4><ul><li><a href="jacob-realtor.html">Home</a></li><li><a href="jacob-listings.html">Listings</a></li><li><a href="jacob-about.html">About</a></li><li><a href="jacob-contact.html">Contact</a></li></ul></div>
+    <div class="fc"><h4>Areas</h4><ul><li><a href="#">River Oaks</a></li><li><a href="#">The Heights</a></li><li><a href="#">Montrose</a></li><li><a href="#">Memorial</a></li></ul></div>
+    <div class="fc"><h4>Connect</h4><ul><li><a href="#">(713) 555-0192</a></li><li><a href="#">jacob@jacobwilliams.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cr=document.getElementById('curRing');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.lc,.gallery-thumb').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});});
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+const imgs=['https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1400&q=80','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80','https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1400&q=80','https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1400&q=80','https://images.unsplash.com/photo-1560184897-ae75f418493e?w=1400&q=80'];
+function setImg(i,el){document.getElementById('mainImg').src=imgs[i];document.getElementById('gallCount').textContent=(i+1)+' / '+imgs.length;document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function openTab(btn,id){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
+</script>
+</body>
+</html>

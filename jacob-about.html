@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Jacob Williams — Luxury Real Estate Houston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Object+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#fafaf8;--sky:#7ec8e3;--gold:#c9a96e;--gray:#111111;--gray2:#0d0d0d;--border:rgba(255,255,255,.07);--ease:cubic-bezier(.76,0,.24,1);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--sky);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease);}
+.cur-ring{position:fixed;width:38px;height:38px;border-radius:50%;border:1px solid rgba(126,200,227,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s var(--ease);}
+.cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:transparent;transition:background .5s,border-color .5s;border-bottom:1px solid transparent;}
+nav.on{background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-color:var(--border);}
+.logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
+.navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover,.navul a.active{color:var(--white);}.navul a:hover::after,.navul a.active::after{transform:scaleX(1);}
+.ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}.hbg span{display:block;height:1px;background:var(--white);transition:all .4s var(--ease);transform-origin:center;}.hbg span:nth-child(1){width:26px}.hbg span:nth-child(2){width:18px}.hbg span:nth-child(3){width:26px}.hbg.open span:nth-child(1){width:26px;transform:translateY(7px) rotate(45deg)}.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}.hbg.open span:nth-child(3){width:26px;transform:translateY(-7px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;justify-content:center;padding:0 8%;opacity:0;visibility:hidden;transition:all .5s var(--ease);}.mmenu.open{opacity:1;visibility:visible;}.mmenu ul{list-style:none;}.mmenu li{overflow:hidden;border-bottom:1px solid var(--border);}.mmenu a{display:block;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.04em;transform:translateY(100%);transition:transform .5s var(--ease),color .3s;}.mmenu.open a{transform:none;}.mmenu a:hover{color:var(--sky);}.mmenu li:nth-child(1) a{transition-delay:.08s}.mmenu li:nth-child(2) a{transition-delay:.13s}.mmenu li:nth-child(3) a{transition-delay:.18s}.mmenu li:nth-child(4) a{transition-delay:.23s}
+.mmenu-contact{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;}.eline{width:38px;height:1px;background:var(--gold);flex-shrink:0;}.etext{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:300;line-height:1.06;color:var(--white);}.stitle em{font-style:italic;color:var(--sky);}
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease);}.sr.sl{transform:translateX(-36px);}.sr.sr2{transform:translateX(36px);}.sr.sc{transform:scale(.96);}.sr.vis{opacity:1;transform:none;}.sd1{transition-delay:.1s}.sd2{transition-delay:.2s}.sd3{transition-delay:.3s}.sd4{transition-delay:.4s}
+
+/* HERO — SPLIT FULL SCREEN */
+.abt-hero{height:100vh;min-height:700px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+.ah-img{position:relative;overflow:hidden;}
+.ah-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transform:scale(1.08);animation:phi 2s .5s var(--ease) both;}
+@keyframes phi{to{transform:scale(1)}}
+.ah-img-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,.1),transparent 40%),linear-gradient(to top,rgba(8,8,8,.5),transparent 50%);}
+.ah-content{display:flex;flex-direction:column;justify-content:flex-end;padding:80px 7% 80px 5%;background:var(--black);position:relative;}
+.ah-vline{position:absolute;left:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,var(--sky),transparent);opacity:.2;}
+.ah-content .eyebrow{animation:fu .8s 1.2s both;}
+.ah-content .stitle{animation:fu .9s 1.3s both;}
+.ah-intro{font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,.5);margin-top:24px;max-width:400px;animation:fu .9s 1.4s both;}
+.ah-scroll{display:flex;align-items:center;gap:12px;margin-top:48px;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.3);animation:fu .9s 1.5s both;}
+.ah-scroll-line{width:48px;height:1px;background:rgba(255,255,255,.2);}
+.ah-name-bg{position:absolute;bottom:60px;left:5%;font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:300;color:rgba(255,255,255,.025);line-height:1;letter-spacing:-.02em;pointer-events:none;white-space:nowrap;overflow:hidden;}
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border);}
+.stat-item{padding:48px 6%;border-right:1px solid var(--border);text-align:center;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:300;line-height:1;color:var(--white);}
+.stat-num sup{font-size:1.4rem;color:var(--sky);}
+.stat-lbl{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:8px;}
+
+/* STORY SECTION */
+.story{padding:120px 8%;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.story-img{position:relative;}
+.story-img img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;}
+.story-img-accent{position:absolute;bottom:-24px;right:-24px;width:180px;height:180px;border:1px solid var(--gold);z-index:-1;}
+.story-img-badge{position:absolute;top:32px;left:-24px;background:var(--black);border:1px solid var(--gold);padding:20px 24px;text-align:center;}
+.sib-num{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--gold);line-height:1;}
+.sib-txt{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px;}
+.story-text .stitle{margin-bottom:28px;}
+.story-text p{font-size:.9rem;line-height:1.9;color:rgba(255,255,255,.48);margin-bottom:20px;}
+.story-text .btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:var(--black);padding:15px 34px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s;margin-top:12px;}
+.story-text .btn-p::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.story-text .btn-p:hover::before{transform:scaleX(1);}
+.story-text .btn-p span{position:relative;z-index:1;display:flex;align-items:center;gap:10px;}
+
+/* PHILOSOPHY */
+.philosophy{background:var(--gray);padding:120px 8%;}
+.phi-header{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:72px;}
+.phi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.phi-card{background:rgba(255,255,255,.025);border:1px solid var(--border);padding:44px 36px;transition:border-color .4s,background .4s;position:relative;overflow:hidden;}
+.phi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sky),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.phi-card:hover{border-color:rgba(126,200,227,.2);background:rgba(126,200,227,.03);}
+.phi-card:hover::before{transform:scaleX(1);}
+.phi-num{font-family:'Cormorant Garamond',serif;font-size:.85rem;color:var(--gold);letter-spacing:.12em;margin-bottom:20px;display:block;}
+.phi-card h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;color:var(--white);margin-bottom:14px;}
+.phi-card p{font-size:.84rem;line-height:1.82;color:rgba(255,255,255,.42);}
+
+/* AWARDS */
+.awards{padding:100px 8%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.awards-list{display:flex;flex-direction:column;gap:1px;}
+.award-row{display:flex;align-items:center;gap:24px;padding:24px 28px;border:1px solid var(--border);transition:border-color .4s,background .4s;}
+.award-row:hover{border-color:rgba(201,169,110,.3);background:rgba(201,169,110,.04);}
+.award-icon{font-size:1.4rem;flex-shrink:0;}
+.award-title{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:2px;}
+.award-year{font-size:.7rem;letter-spacing:.1em;color:rgba(255,255,255,.35);}
+.awards-visual{position:relative;}
+.awards-visual img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.awards-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(126,200,227,.1),transparent);}
+
+/* TESTIMONIALS STRIP */
+.tsti{background:#0c0c0c;padding:100px 8%;}
+.tsti-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:60px;}
+.tc{background:rgba(255,255,255,.025);border:1px solid var(--border);padding:40px 36px;transition:border-color .4s,background .4s;}
+.tc:hover{border-color:rgba(126,200,227,.22);background:rgba(126,200,227,.035);}
+.tstars{display:flex;gap:4px;margin-bottom:22px;}.st{width:10px;height:10px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.tq{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:300;line-height:1.72;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:28px;}
+.tdiv{width:28px;height:1px;background:var(--gold);margin-bottom:18px;}
+.tname{font-size:.76rem;font-weight:700;color:var(--white);letter-spacing:.05em;}.tloc{font-size:.65rem;color:rgba(255,255,255,.32);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;}
+
+/* CTA BAND */
+.cta-band{background:var(--sky);padding:80px 8%;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
+.cta-band-txt{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:var(--black);line-height:1.1;}
+.cta-band-txt em{font-style:italic;}
+.btn-dark{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--white);padding:15px 34px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .35s;flex-shrink:0;}
+.btn-dark:hover{background:#1a1a1a;}
+
+/* FOOTER */
+footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44px;}
+.fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.fl-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.fl-tag{font-size:.8rem;line-height:1.8;color:rgba(255,255,255,.28);max-width:220px;}
+.fc h4{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px;}.fc a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.38);transition:color .3s;}.fc a:hover{color:var(--sky);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:10px;}.fbot p{font-size:.68rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+
+@media(max-width:1024px){.abt-hero{grid-template-columns:1fr;height:auto;}.ah-img{height:60vw;min-height:340px;}.ah-content{padding:60px 7%;}.stats-row{grid-template-columns:1fr 1fr;}.story{grid-template-columns:1fr;gap:48px;}.story-img-accent{display:none;}.awards{grid-template-columns:1fr;}.phi-header{grid-template-columns:1fr;gap:24px;}.tsti-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){.navul{display:none}.hbg{display:flex}.mmenu{display:flex}.phi-grid{grid-template-columns:1fr;}.stats-row{grid-template-columns:1fr 1fr;}.fg-grid{grid-template-columns:1fr 1fr;gap:32px;}.ah-name-bg{display:none;}}
+@media(max-width:480px){.stats-row{grid-template-columns:1fr 1fr;}.fg-grid{grid-template-columns:1fr;}.cta-band{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav id="nav">
+  <a href="jacob-realtor.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
+  <ul class="navul">
+    <li><a href="jacob-listings.html">Listings</a></li>
+    <li><a href="jacob-about.html" class="active">About</a></li>
+    <li><a href="jacob-contact.html" class="ncta">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="jacob-realtor.html" class="ml">Home</a></li>
+    <li><a href="jacob-listings.html" class="ml">Listings</a></li>
+    <li><a href="jacob-about.html" class="ml">About</a></li>
+    <li><a href="jacob-contact.html" class="ml">Contact</a></li>
+  </ul>
+  <p class="mmenu-contact">(713) 555-0192</p>
+</div>
+
+<!-- HERO -->
+<section class="abt-hero" id="home">
+  <div class="ah-img">
+    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=85&fit=crop&crop=top" alt="Jacob Williams">
+    <div class="ah-img-ov"></div>
+  </div>
+  <div class="ah-content">
+    <div class="ah-vline"></div>
+    <div class="ah-name-bg">JACOB</div>
+    <div class="eyebrow"><div class="eline"></div><span class="etext">Meet Jacob</span></div>
+    <h1 class="stitle">The Realtor<br><em>Houston Trusts</em></h1>
+    <p class="ah-intro">12 years of dedication, deep local roots, and an unwavering commitment to putting clients first — that's the Jacob Williams difference.</p>
+    <div class="ah-scroll"><div class="ah-scroll-line"></div>Scroll to explore</div>
+  </div>
+</section>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-item sr sd1"><div class="stat-num">320<sup>+</sup></div><div class="stat-lbl">Homes Sold</div></div>
+  <div class="stat-item sr sd2"><div class="stat-num">12<sup>yr</sup></div><div class="stat-lbl">Experience</div></div>
+  <div class="stat-item sr sd3"><div class="stat-num">$1.2<sup>B</sup></div><div class="stat-lbl">Total Sales Volume</div></div>
+  <div class="stat-item sr sd4"><div class="stat-num">98<sup>%</sup></div><div class="stat-lbl">Client Satisfaction</div></div>
+</div>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-img sr sl">
+    <img src="https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?w=700&q=85&fit=crop&crop=top" alt="Jacob Williams">
+    <div class="story-img-accent"></div>
+    <div class="story-img-badge sr sc"><div class="sib-num">320</div><div class="sib-txt">Families<br>Helped</div></div>
+  </div>
+  <div class="story-text sr sr2">
+    <div class="eyebrow"><div class="eline"></div><span class="etext">My Story</span></div>
+    <h2 class="stitle">Born &amp; Raised<br><em>In Houston</em></h2>
+    <p>I grew up in Houston watching this city grow from a thriving energy capital into one of the most dynamic real estate markets in the nation. That lifelong connection gives me something no newcomer can replicate — genuine, deep knowledge of every neighborhood, every street, every shift in market momentum.</p>
+    <p>After earning my real estate license in 2012, I committed to one thing: being the agent I would have wanted when buying my own home. That means radical transparency, relentless preparation, and treating every single client like they're my only client.</p>
+    <p>Over the past 12 years, I've helped more than 320 families across Houston find their perfect home — from first-time buyers in Katy to executives relocating to River Oaks. Every transaction has reinforced what I believe: real estate is ultimately about trust.</p>
+    <a href="jacob-contact.html" class="btn-p"><span>Work With Me <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="phi-header">
+    <div class="sr sl">
+      <div class="eyebrow"><div class="eline"></div><span class="etext">My Approach</span></div>
+      <h2 class="stitle">The Jacob<br><em>Williams Way</em></h2>
+    </div>
+    <p class="sr" style="font-size:.9rem;line-height:1.9;color:rgba(255,255,255,.45);padding-top:80px;">Every realtor promises results. I deliver them through a specific, proven approach built on three core principles that guide every client relationship I have.</p>
+  </div>
+  <div class="phi-grid">
+    <div class="phi-card sr sd1"><span class="phi-num">01</span><h3>Radical Transparency</h3><p>No spin, no pressure tactics. I give you the unfiltered truth about every property, every offer, and every market condition — so you can make confident, informed decisions.</p></div>
+    <div class="phi-card sr sd2"><span class="phi-num">02</span><h3>Relentless Preparation</h3><p>I research every property, every comparable sale, and every neighborhood detail before we ever step through a door. Preparation is the foundation of negotiation power.</p></div>
+    <div class="phi-card sr sd3"><span class="phi-num">03</span><h3>Undivided Attention</h3><p>I deliberately limit my client roster so every person I work with receives my full focus. Your goals, timeline, and vision are always my top priority.</p></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards">
+  <div class="sr sl">
+    <div class="eyebrow"><div class="eline"></div><span class="etext">Recognition</span></div>
+    <h2 class="stitle">Awards &amp;<br><em>Accolades</em></h2>
+    <p style="font-size:.9rem;line-height:1.85;color:rgba(255,255,255,.45);margin:20px 0 36px;">The results speak for themselves — but it's the relationships that I'm most proud of.</p>
+    <div class="awards-list">
+      <div class="award-row sr sd1"><div class="award-icon">🏆</div><div><div class="award-title">Top 5% Houston Realtors</div><div class="award-year">Houston Association of Realtors · 2022, 2023, 2024</div></div></div>
+      <div class="award-row sr sd2"><div class="award-icon">⭐</div><div><div class="award-title">Five Star Professional Award</div><div class="award-year">Texas Monthly Magazine · 2021–2024</div></div></div>
+      <div class="award-row sr sd3"><div class="award-icon">🥇</div><div><div class="award-title">Platinum Producer</div><div class="award-year">Compass Realty Houston · 2019, 2020, 2021</div></div></div>
+      <div class="award-row sr sd4"><div class="award-icon">🎖️</div><div><div class="award-title">Rising Star Award</div><div class="award-year">Houston Business Journal · 2015</div></div></div>
+    </div>
+  </div>
+  <div class="awards-visual sr sr2">
+    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=700&q=80" alt="Houston Luxury Home">
+    <div class="awards-visual-overlay"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tsti">
+  <div class="sr" style="text-align:center;margin-bottom:0;">
+    <div class="eyebrow" style="justify-content:center;"><div class="eline"></div><span class="etext">Client Stories</span></div>
+    <h2 class="stitle">What My Clients Say</h2>
+  </div>
+  <div class="tsti-grid">
+    <div class="tc sr sd1"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"Jacob found us our dream home in The Heights in two weeks flat. His market knowledge and negotiation skills saved us $40K off asking. He's the only realtor I'll ever call."</p><div class="tdiv"></div><div class="tname">Marcus &amp; Rachel T.</div><div class="tloc">Buyers — The Heights</div></div>
+    <div class="tc sr sd2"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"We sold our River Oaks home in 9 days — $80,000 over asking price. Jacob's marketing strategy and network are genuinely on another level."</p><div class="tdiv"></div><div class="tname">Sandra L.</div><div class="tloc">Seller — River Oaks</div></div>
+    <div class="tc sr sd3"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"Relocating from New York, we knew nothing about Houston neighborhoods. Jacob's guidance was invaluable — patient, thorough, and always honest."</p><div class="tdiv"></div><div class="tname">The Okonkwo Family</div><div class="tloc">Relocation — Memorial</div></div>
+    <div class="tc sr sd4"><div class="tstars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div><p class="tq">"Third home purchase with Jacob. There's a reason I keep coming back — he genuinely cares about getting you the best outcome, every single time."</p><div class="tdiv"></div><div class="tname">David M.</div><div class="tloc">Repeat Client — West University</div></div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band sr">
+  <div class="cta-band-txt">Ready to find your<br><em>perfect Houston home?</em></div>
+  <a href="jacob-contact.html" class="btn-dark">Schedule a Consultation <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg-grid">
+    <div><div class="fl-name">Jacob Williams</div><p class="fl-tag">Houston's trusted luxury real estate advisor — helping families find exceptional homes since 2012.</p></div>
+    <div class="fc"><h4>Navigate</h4><ul><li><a href="jacob-realtor.html">Home</a></li><li><a href="jacob-listings.html">Listings</a></li><li><a href="jacob-about.html">About</a></li><li><a href="jacob-contact.html">Contact</a></li></ul></div>
+    <div class="fc"><h4>Areas</h4><ul><li><a href="#">River Oaks</a></li><li><a href="#">The Heights</a></li><li><a href="#">Montrose</a></li><li><a href="#">Memorial</a></li></ul></div>
+    <div class="fc"><h4>Connect</h4><ul><li><a href="#">(713) 555-0192</a></li><li><a href="#">jacob@jacobwilliams.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="fbot"><p>© 2025 Jacob Williams Real Estate. All Rights Reserved.</p><p>Licensed Texas Realtor · TREC #12345678</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cr=document.getElementById('curRing');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.award-row,.phi-card,.tc').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});});
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('on',scrollY>30));
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{hbg.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+const hp=document.querySelector('.ah-img img');
+window.addEventListener('scroll',()=>{if(hp)hp.style.transform=`translateY(${scrollY*.08}px) scale(1)`;});
+</script>
+</body>
+</html>
