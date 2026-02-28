@@ -224,21 +224,25 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
-  <button class="filter-btn active" onclick="setFilter(this,'all')">All Properties</button>
-  <button class="filter-btn" onclick="setFilter(this,'sale')">For Sale</button>
-  <button class="filter-btn" onclick="setFilter(this,'pending')">Pending</button>
-  <button class="filter-btn" onclick="setFilter(this,'sold')">Recently Sold</button>
-  <button class="filter-btn" onclick="setFilter(this,'luxury')">Luxury</button>
-  <button class="filter-btn" onclick="setFilter(this,'investment')">Investment</button>
+  <button class="filter-btn active" data-filter="all">All Properties</button>
+  <button class="filter-btn" data-filter="sale">For Sale</button>
+  <button class="filter-btn" data-filter="new">New</button>
+  <button class="filter-btn" data-filter="pending">Pending</button>
+  <button class="filter-btn" data-filter="sold">Recently Sold</button>
+  <button class="filter-btn" data-filter="luxury">Luxury</button>
+  <button class="filter-btn" data-filter="new-construction">New Construction</button>
+  <button class="filter-btn" data-filter="family">Family</button>
+  <button class="filter-btn" data-filter="investment">Investment</button>
+  <button class="filter-btn" data-filter="condo-townhome">Condo / Townhome</button>
 </div>
 
 <!-- SEARCH ROW -->
 <div class="search-row">
   <input class="s-input" type="text" placeholder="Search by neighborhood, street, or ZIP code...">
-  <select class="s-select"><option>Any Price</option><option>Under $500K</option><option>$500K – $1M</option><option>$1M – $2M</option><option>$2M+</option></select>
-  <select class="s-select"><option>Any Beds</option><option>2+ Beds</option><option>3+ Beds</option><option>4+ Beds</option><option>5+ Beds</option></select>
-  <select class="s-select"><option>Any Area</option><option>River Oaks</option><option>The Heights</option><option>Montrose</option><option>Memorial</option><option>Bellaire</option></select>
-  <button class="s-btn">Search</button>
+  <select class="s-select" id="filterPrice"><option value="">Any Price</option></select>
+  <select class="s-select" id="filterBeds"><option value="">Any Beds</option></select>
+  <select class="s-select" id="filterArea"><option value="">Any Area</option></select>
+  <button class="s-btn" id="searchBtn">Search</button>
 </div>
 
 <!-- FEATURED BANNER -->
@@ -268,7 +272,7 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 <!-- LISTINGS GRID -->
 <section class="listings-sec">
   <div class="grid-header sr">
-    <span class="grid-count">Showing 9 of 24 properties</span>
+    <span class="grid-count" id="gridCount">Showing 9 of 24 properties</span>
     <div class="grid-views">
       <button class="vbtn active" id="gridBtn" title="Grid view">⊞</button>
       <button class="vbtn" id="listBtn" title="List view">☰</button>
@@ -276,60 +280,13 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
   </div>
 
   <div class="lg" id="listGrid">
-    <a href="jacob-property.html" class="lc sr sd1">
-      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="River Oaks">
-      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$1,450,000</div><div class="laddr">4812 Shadyside Ln · River Oaks</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,800 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd2">
-      <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=700&q=80" alt="Heights">
-      <div class="lc-ov"></div><div class="lbadge">New</div>
-      <div class="linfo"><div class="lprice">$975,000</div><div class="laddr">2203 Rutland St · The Heights</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2 Baths</span><span>·</span><span>2,100 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd3">
-      <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80" alt="Memorial">
-      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$2,100,000</div><div class="laddr">7701 Hunters Creek Dr · Memorial</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4 Baths</span><span>·</span><span>4,200 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd1">
-      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Montrose">
-      <div class="lc-ov"></div><div class="lbadge pending">Pending</div>
-      <div class="linfo"><div class="lprice">$785,000</div><div class="laddr">1822 Westheimer Rd · Montrose</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2.5 Baths</span><span>·</span><span>1,950 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd2">
-      <img src="https://images.unsplash.com/photo-1598228723793-52759bba239c?w=700&q=80" alt="Bellaire">
-      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$1,175,000</div><div class="laddr">5509 Maple St · Bellaire</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3 Baths</span><span>·</span><span>2,800 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd3">
-      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="West University">
-      <div class="lc-ov"></div><div class="lbadge sold">Sold</div>
-      <div class="linfo"><div class="lprice">$2,450,000</div><div class="laddr">3301 Rice Blvd · West University</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4.5 Baths</span><span>·</span><span>4,600 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd1">
-      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="Katy">
-      <div class="lc-ov"></div><div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$549,000</div><div class="laddr">420 Cinco Ranch Blvd · Katy</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3 Baths</span><span>·</span><span>2,400 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd2">
-      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Sugar Land">
-      <div class="lc-ov"></div><div class="lbadge">New</div>
-      <div class="linfo"><div class="lprice">$895,000</div><div class="laddr">1609 First Colony Blvd · Sugar Land</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,100 sqft</span></div></div>
-    </a>
-    <a href="jacob-property.html" class="lc sr sd3">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Midtown">
-      <div class="lc-ov"></div><div class="lbadge pending">Pending</div>
-      <div class="linfo"><div class="lprice">$665,000</div><div class="laddr">2200 Main St · Midtown</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2 Baths</span><span>·</span><span>1,800 sqft</span></div></div>
-    </a>
+    <!-- Cards injected by listings-data.js -->
   </div>
 
-  <div class="pagination sr">
-    <a href="#" class="ppage active">1</a>
-    <a href="#" class="ppage">2</a>
-    <a href="#" class="ppage">3</a>
-    <a href="#" class="pnext">Next <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  </div>
+  <div class="pagination sr" id="pagination"></div>
 </section>
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -369,5 +326,241 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
   <span>Book a Call</span>
 </button>
+
+<script src="listings-data.js"></script>
+<script>
+(function(){
+  const PER_PAGE = 9;
+  let currentPage = 1;
+  let activeFilter = 'all';
+  let searchTerm = '';
+  let filterPrice = '';
+  let filterBeds  = '';
+  let filterArea  = '';
+
+  function priceNum(priceStr){
+    return parseInt(priceStr.replace(/[$,]/g,'')) / 1000;
+  }
+
+  function badgeClass(status){
+    if(status==='Sold') return 'sold';
+    if(status==='Pending') return 'pending';
+    return '';
+  }
+
+  function filtered(){
+    return LISTINGS.filter(p => {
+      // Tab filter — uses explicit categories[] + status
+      const cats = p.categories || [];
+      const matchFilter =
+        activeFilter === 'all' ||
+        (activeFilter === 'sale'             && (p.status === 'For Sale' || p.status === 'New')) ||
+        (activeFilter === 'new'              && p.status === 'New') ||
+        (activeFilter === 'pending'          && p.status === 'Pending') ||
+        (activeFilter === 'sold'             && p.status === 'Sold') ||
+        (activeFilter === 'luxury'           && cats.includes('luxury')) ||
+        (activeFilter === 'new-construction' && cats.includes('new-construction')) ||
+        (activeFilter === 'family'           && cats.includes('family')) ||
+        (activeFilter === 'investment'       && cats.includes('investment')) ||
+        (activeFilter === 'condo-townhome'   && cats.includes('condo-townhome'));
+
+      // Price dropdown
+      let matchPrice = true;
+      if(filterPrice){
+        const [lo,hi] = filterPrice.split('-').map(Number);
+        matchPrice = pNum >= lo && pNum <= hi;
+      }
+
+      // Beds dropdown
+      let matchBeds = true;
+      if(filterBeds) matchBeds = p.beds >= parseInt(filterBeds);
+
+      // Area dropdown
+      let matchArea = true;
+      if(filterArea) matchArea = p.neighborhood === filterArea;
+
+      // Search text
+      const q = searchTerm.toLowerCase();
+      const matchSearch = !q ||
+        p.address.toLowerCase().includes(q) ||
+        p.neighborhood.toLowerCase().includes(q) ||
+        p.city.toLowerCase().includes(q) ||
+        p.price.includes(q);
+
+      return matchFilter && matchPrice && matchBeds && matchArea && matchSearch;
+    });
+  }
+
+  function cardHTML(p, delay){
+    const cls = badgeClass(p.status);
+    return `<a href="jacob-property.html?id=${p.id}" class="lc sr sd${delay}">
+      <img src="${p.images[0]}" alt="${p.address}" loading="lazy">
+      <div class="lc-ov"></div>
+      <div class="lbadge ${cls}">${p.status}</div>
+      <div class="linfo">
+        <div class="lprice">${p.price}</div>
+        <div class="laddr">${p.address} · ${p.neighborhood}</div>
+        <div class="lspecs"><span>${p.beds} Beds</span><span>·</span><span>${p.baths} Baths</span><span>·</span><span>${p.sqft} sqft</span></div>
+      </div>
+    </a>`;
+  }
+
+  function render(){
+    const grid = document.getElementById('listGrid');
+    const list = filtered();
+    const total = list.length;
+    const start = (currentPage-1)*PER_PAGE;
+    const page  = list.slice(start, start+PER_PAGE);
+
+    grid.innerHTML = page.map((p,i) => cardHTML(p,(i%3)+1)).join('');
+
+    // Update count
+    const countEl = document.getElementById('gridCount');
+    if(countEl) countEl.textContent = `Showing ${Math.min(start+1,total)}–${Math.min(start+PER_PAGE,total)} of ${total} properties`;
+
+    // Pagination
+    const pages = Math.ceil(total/PER_PAGE);
+    const pg = document.getElementById('pagination');
+    if(pages <= 1){ pg.innerHTML=''; return; }
+    let html = '';
+    for(let i=1;i<=pages;i++){
+      html += `<a href="#" class="ppage${i===currentPage?' active':''}" onclick="goPage(${i});return false;">${i}</a>`;
+    }
+    if(currentPage < pages){
+      html += `<a href="#" class="pnext" onclick="goPage(${currentPage+1});return false;">Next <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`;
+    }
+    pg.innerHTML = html;
+
+    // Re-observe scroll reveal
+    document.querySelectorAll('.sr:not(.vis)').forEach(el => obs.observe(el));
+
+    // Re-bind cursor
+    if(!isMobile&&cur){
+      document.querySelectorAll('a,button').forEach(el=>{
+        el.addEventListener('mouseenter',()=>{cur.classList.add('big');cr.classList.add('big');});
+        el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cr.classList.remove('big');});
+      });
+    }
+  }
+
+  window.goPage = function(n){ currentPage=n; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter || 'all';
+      currentPage = 1;
+      render();
+    });
+  });
+
+  // Search text input (live)
+  const searchInput = document.getElementById('searchInput');
+  if(searchInput){
+    searchInput.addEventListener('input', e => {
+      searchTerm = e.target.value;
+      currentPage = 1;
+      render();
+    });
+  }
+
+  // Search button
+  const searchBtn = document.getElementById('searchBtn');
+  if(searchBtn){
+    searchBtn.addEventListener('click', () => {
+      searchTerm = searchInput ? searchInput.value : '';
+      currentPage = 1;
+      render();
+    });
+  }
+
+  // Price dropdown
+  const priceEl = document.getElementById('filterPrice');
+  if(priceEl) priceEl.addEventListener('change', e => { filterPrice = e.target.value; currentPage=1; render(); });
+
+  // Beds dropdown
+  const bedsEl = document.getElementById('filterBeds');
+  if(bedsEl) bedsEl.addEventListener('change', e => { filterBeds = e.target.value; currentPage=1; render(); });
+
+  // Area dropdown
+  const areaEl = document.getElementById('filterArea');
+  if(areaEl) areaEl.addEventListener('change', e => { filterArea = e.target.value; currentPage=1; render(); });
+
+  // Grid / List toggle
+  const gridBtn = document.getElementById('gridBtn');
+  const listBtn = document.getElementById('listBtn');
+  if(gridBtn) gridBtn.addEventListener('click',()=>{ document.getElementById('listGrid').classList.remove('list-view'); gridBtn.classList.add('active'); listBtn.classList.remove('active'); });
+  if(listBtn) listBtn.addEventListener('click',()=>{ document.getElementById('listGrid').classList.add('list-view'); listBtn.classList.add('active'); gridBtn.classList.remove('active'); });
+
+  // ── BUILD DROPDOWNS FROM LIVE DATA ──────────────────────────
+  function buildDropdowns(){
+    // PRICE — generate smart brackets from actual prices in data
+    const prices = LISTINGS.map(p => parseInt(p.price.replace(/[$,]/g,''))).sort((a,b)=>a-b);
+    const min = prices[0];
+    const max = prices[prices.length-1];
+
+    const brackets = [];
+    const thresholds = [500000, 1000000, 1500000, 2000000, 3000000, 5000000];
+    let prev = 0;
+    thresholds.forEach(t => {
+      if(t > min && prev < max){
+        const lo = prev;
+        const hi = t;
+        const inRange = prices.some(p => p >= lo && p < hi);
+        if(inRange){
+          const loStr = lo === 0 ? 'Under ' + fmt(hi) : fmt(lo) + ' – ' + fmt(hi);
+          brackets.push({ label: loStr, value: lo/1000 + '-' + hi/1000 });
+        }
+        prev = t;
+      }
+    });
+    // Catch anything above last threshold
+    if(prices.some(p => p >= prev)){
+      brackets.push({ label: fmt(prev) + '+', value: prev/1000 + '-99999' });
+    }
+
+    const priceEl = document.getElementById('filterPrice');
+    brackets.forEach(b => {
+      const o = document.createElement('option');
+      o.value = b.value; o.textContent = b.label;
+      priceEl.appendChild(o);
+    });
+
+    // BEDS — only show options that actually exist in data
+    const bedCounts = [...new Set(LISTINGS.map(p => p.beds))].sort((a,b)=>a-b);
+    const minBeds = Math.floor(Math.min(...bedCounts));
+    const maxBeds = Math.floor(Math.max(...bedCounts));
+    const bedsEl = document.getElementById('filterBeds');
+    for(let b = minBeds; b <= maxBeds; b++){
+      if(LISTINGS.some(p => p.beds >= b)){
+        const o = document.createElement('option');
+        o.value = b; o.textContent = b + '+ Beds';
+        bedsEl.appendChild(o);
+      }
+    }
+
+    // AREA — pull unique neighborhoods from data, sorted A–Z
+    const areas = [...new Set(LISTINGS.map(p => p.neighborhood))].sort();
+    const areaEl = document.getElementById('filterArea');
+    areas.forEach(a => {
+      const o = document.createElement('option');
+      o.value = a; o.textContent = a;
+      areaEl.appendChild(o);
+    });
+  }
+
+  function fmt(n){
+    if(n >= 1000000) return '$' + (n/1000000 % 1 === 0 ? n/1000000 : (n/1000000).toFixed(1)) + 'M';
+    return '$' + (n/1000) + 'K';
+  }
+
+  buildDropdowns();
+  // ────────────────────────────────────────────────────────────
+
+  render();
+})();
+</script>
 </body>
 </html>

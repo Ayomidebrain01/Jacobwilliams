@@ -357,24 +357,7 @@ footer { background:#040404; border-top:1px solid var(--border); padding:72px 8%
     <a href="jacob-listings.html" class="btn-g sr">View All Properties</a>
   </div>
   <div class="lg">
-    <div class="lc sr sd1">
-      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="River Oaks">
-      <div class="lc-ov"></div>
-      <div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$1,450,000</div><div class="laddr">4812 Shadyside Ln — River Oaks</div><div class="lspecs"><span>4 Beds</span><span>·</span><span>3.5 Baths</span><span>·</span><span>3,800 sqft</span></div></div>
-    </div>
-    <div class="lc sr sd2">
-      <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=700&q=80" alt="Heights">
-      <div class="lc-ov"></div>
-      <div class="lbadge">New</div>
-      <div class="linfo"><div class="lprice">$975,000</div><div class="laddr">2203 Rutland St — The Heights</div><div class="lspecs"><span>3 Beds</span><span>·</span><span>2 Baths</span><span>·</span><span>2,100 sqft</span></div></div>
-    </div>
-    <div class="lc sr sd3">
-      <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80" alt="Memorial">
-      <div class="lc-ov"></div>
-      <div class="lbadge">For Sale</div>
-      <div class="linfo"><div class="lprice">$2,100,000</div><div class="laddr">7701 Hunters Creek Dr — Memorial</div><div class="lspecs"><span>5 Beds</span><span>·</span><span>4 Baths</span><span>·</span><span>4,200 sqft</span></div></div>
-    </div>
+    <!-- Top 3 listings injected from listings-data.js -->
   </div>
 </section>
 
@@ -517,5 +500,29 @@ function toggleFaq(el){
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
   <span>Book a Call</span>
 </button>
+
+<script src="listings-data.js"></script>
+<script>
+(function(){
+  // Show first 3 active (non-sold) listings on homepage
+  const featured = LISTINGS.filter(l=>l.status!=='Sold').slice(0,3);
+  const delays = [1,2,3];
+  document.querySelector('#listings .lg').innerHTML = featured.map((p,i)=>{
+    const cls = p.status==='Sold'?'sold':p.status==='Pending'?'pending':'';
+    return `<a href="jacob-property.html?id=${p.id}" class="lc sr sd${delays[i]}">
+      <img src="${p.images[0]}" alt="${p.address}" loading="lazy">
+      <div class="lc-ov"></div>
+      <div class="lbadge ${cls}">${p.status}</div>
+      <div class="linfo">
+        <div class="lprice">${p.price}</div>
+        <div class="laddr">${p.address} · ${p.neighborhood}</div>
+        <div class="lspecs"><span>${p.beds} Beds</span><span>·</span><span>${p.baths} Baths</span><span>·</span><span>${p.sqft} sqft</span></div>
+      </div>
+    </a>`;
+  }).join('');
+  // Re-observe new elements
+  document.querySelectorAll('#listings .sr:not(.vis)').forEach(el=>obs.observe(el));
+})();
+</script>
 </body>
 </html>
