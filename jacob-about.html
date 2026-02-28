@@ -15,6 +15,7 @@ body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--wh
 .cur.big{width:52px;height:52px;background:rgba(126,200,227,.15);}.cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:transparent;transition:background .5s,border-color .5s;border-bottom:1px solid transparent;}
 nav.on{background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-color:var(--border);}
+nav{transition:transform .45s cubic-bezier(.76,0,.24,1),opacity .45s cubic-bezier(.76,0,.24,1),background .5s,border-color .5s!important;}nav.hidden{transform:translateY(-110%);opacity:0;pointer-events:none;}
 .logo{text-decoration:none;line-height:1;}.logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}.logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
 .navul{display:flex;align-items:center;gap:38px;list-style:none;}.navul a{text-decoration:none;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:color .3s;position:relative;}.navul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}.navul a:hover,.navul a.active{color:var(--white);}.navul a:hover::after,.navul a.active::after{transform:scaleX(1);}
 .ncta{border:1px solid rgba(126,200,227,.35)!important;color:var(--sky)!important;padding:10px 22px;transition:all .35s!important;}.ncta::after{display:none!important;}.ncta:hover{background:var(--sky)!important;color:var(--black)!important;border-color:var(--sky)!important;}
@@ -285,5 +286,28 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
   <span>Book a Call</span>
 </button>
+
+<script>
+// Hide nav on scroll down (fade+slide), show on scroll up
+(function(){
+  var nav=document.getElementById('nav')||document.querySelector('nav');
+  if(!nav) return;
+  var lastY=window.scrollY, ticking=false;
+  function onScroll(){
+    var y=window.scrollY;
+    if(y>80){
+      if(y>lastY) nav.classList.add('hidden');
+      else nav.classList.remove('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    lastY=y;
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ticking=true;requestAnimationFrame(onScroll);}
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
