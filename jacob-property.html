@@ -53,7 +53,13 @@ nav.on{background:#000;border-color:var(--border);}
 /* LEFT COLUMN */
 .prop-left{padding:72px 6% 72px 8%;}
 .prop-header{margin-bottom:52px;}
-.prop-badge{display:inline-block;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;margin-bottom:20px;}
+.prop-badge{display:inline-block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;margin-bottom:20px;border:none;background:var(--sky);color:#fff;}
+.prop-badge.rent{background:var(--gold);color:#080808;}
+.prop-badge.new{background:#b0b0a8;color:#080808;}
+.prop-badge.sold{background:rgba(255,255,255,.15);color:rgba(255,255,255,.7);}
+.prop-badge.pending{background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);}
+.lbadge.rent{background:var(--gold);color:#080808;border:none;}
+.lbadge.new{background:#b0b0a8;color:#080808;border:none;}
 .prop-price{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5rem);font-weight:300;line-height:1;color:var(--white);margin-bottom:12px;}
 .prop-address{font-size:1rem;color:rgba(255,255,255,.55);letter-spacing:.04em;margin-bottom:24px;}
 .prop-quick-specs{display:flex;gap:0;border:1px solid var(--border);margin-bottom:0;}
@@ -575,7 +581,7 @@ const LISTINGS = [
   document.querySelector('.breadcrumb .current').textContent = p.address + ', ' + p.neighborhood;
 
   // Badge
-  function badgeClass(s){ return s==='Sold'?'sold':s==='Pending'?'pending':s==='For Rent'?'rent':''; }
+  function badgeClass(s){ return s==='Sold'?'sold':s==='Pending'?'pending':s==='For Rent'?'rent':s==='New'?'new':''; }
   const badge = document.querySelector('.prop-badge');
   badge.textContent = p.status + (p.listingType==='For Sale' ? ' · Exclusive Listing' : p.listingType==='For Rent' ? ' · Available Now' : '');
   badge.className = 'prop-badge ' + badgeClass(p.status);

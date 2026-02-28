@@ -19,7 +19,8 @@ body{font-family:'Object Sans',sans-serif;background:var(--black);color:var(--wh
 .cur-ring.big{width:70px;height:70px;border-color:var(--sky);}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:78px;background:transparent;transition:background .5s var(--ease,cubic-bezier(.76,0,.24,1)),border-color .5s;border-bottom:1px solid transparent;}
+nav.on{background:#000;border-color:var(--border);}
 .logo{text-decoration:none;line-height:1;}
 .logo-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:block;}
 .logo-s{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-top:3px;display:block;}
@@ -96,10 +97,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .lc:hover img{transform:scale(1.06);}
 .lc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 50%,transparent 100%);transition:background .4s;}
 .lc:hover .lc-ov{background:linear-gradient(to top,rgba(0,0,0,.94) 0%,rgba(0,0,0,.25) 55%,transparent 100%);}
-.lbadge{position:absolute;top:18px;left:18px;border:1px solid rgba(126,200,227,.55);color:var(--sky);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px;}
-.lbadge.sold{border-color:rgba(201,169,110,.55);color:var(--gold);}
-.lbadge.pending{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.6);}
-.lbadge.rent{border-color:rgba(126,200,227,.7);color:var(--sky);background:rgba(126,200,227,.12);}
+.lbadge{position:absolute;top:18px;left:18px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px;border:none;}
+.lbadge{background:var(--sky);color:#fff;}
+.lbadge.rent{background:var(--gold);color:#080808;}
+.lbadge.new{background:#b0b0a8;color:#080808;}
+.lbadge.sold{background:rgba(255,255,255,.15);color:rgba(255,255,255,.7);}
+.lbadge.pending{background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);}
 .linfo{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;transform:translateY(10px);transition:transform .4s var(--ease);}
 .lc:hover .linfo{transform:none;}
 .lprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;color:var(--white);line-height:1;margin-bottom:7px;}
@@ -173,7 +176,7 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="curRing"></div>
 
-<nav>
+<nav id="nav">
   <a href="index.html" class="logo"><span class="logo-n">Jacob Williams</span><span class="logo-s">Luxury Real Estate · Houston</span></a>
   <ul class="navul">
     <li><a href="jacob-services.html">Services</a></li>
@@ -530,6 +533,7 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
     if(status==='Sold') return 'sold';
     if(status==='Pending') return 'pending';
     if(status==='For Rent') return 'rent';
+    if(status==='New') return 'new';
     return '';
   }
 
@@ -767,5 +771,24 @@ document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
   render();
 })();
 </script>
+
+// ── NAV TRANSPARENCY ────────────────────────────────────────
+(function(){
+  var nav = document.getElementById('nav') || document.querySelector('nav');
+  function updateNav(){
+    // Find the hero section (first full-width section after nav)
+    var hero = document.querySelector('.hero-section,.page-hero,.gallery-hero,.contact-hero,.ah-hero,.srv-hero') 
+            || document.querySelector('section,header');
+    var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 10) : 80;
+    if(window.scrollY >= threshold){
+      nav.classList.add('on');
+    } else {
+      nav.classList.remove('on');
+    }
+  }
+  window.addEventListener('scroll', updateNav, {passive:true});
+  updateNav();
+})();
+
 </body>
 </html>
