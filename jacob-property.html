@@ -90,12 +90,17 @@ nav.on{background:#000;border-color:var(--border);}
 .detail-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);}
 .detail-value{font-size:.88rem;color:var(--white);font-weight:700;}
 
-/* MAP PLACEHOLDER */
-.map-placeholder{background:var(--gray);border:1px solid var(--border);height:340px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,.3);}
-.map-placeholder .map-icon{font-size:2rem;}
-.map-placeholder p{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;}
-.map-nearby{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
-.nearby-item{padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--border);}
+/* MAP */
+.map-wrap{position:relative;height:360px;border:1px solid var(--border);overflow:hidden;}
+.map-wrap iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(1) invert(1) contrast(.85) brightness(.78) hue-rotate(180deg);}
+.map-overlay-bar{position:absolute;bottom:0;left:0;right:0;padding:12px 18px;background:rgba(8,8,8,.82);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.mob-pin{font-size:.9rem;}
+.mob-addr{font-size:.72rem;letter-spacing:.06em;color:rgba(255,255,255,.55);}
+.mob-link{margin-left:auto;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);text-decoration:none;border:1px solid rgba(126,200,227,.3);padding:6px 14px;transition:all .3s;white-space:nowrap;}
+.mob-link:hover{background:var(--sky);color:var(--black);}
+.map-nearby{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;}
+.nearby-item{padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--border);transition:border-color .3s,background .3s;}
+.nearby-item:hover{border-color:rgba(126,200,227,.2);background:rgba(126,200,227,.03);}
 .nearby-name{font-size:.8rem;font-weight:700;color:var(--white);margin-bottom:2px;}
 .nearby-dist{font-size:.7rem;color:rgba(255,255,255,.35);}
 
@@ -322,18 +327,15 @@ footer{background:#040404;border-top:1px solid var(--border);padding:72px 8% 44p
 
     <!-- LOCATION -->
     <div class="tab-panel" id="location">
-      <div class="map-placeholder sr">
-        <div class="map-icon">📍</div>
-        <p>1204 Kirby Drive, River Oaks</p>
+      <div class="map-wrap sr">
+        <iframe id="mapFrame" src="" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-overlay-bar">
+          <span class="mob-pin">📍</span>
+          <span class="mob-addr" id="mapAddr"></span>
+          <a class="mob-link" id="mapDirections" href="#" target="_blank">Get Directions ↗</a>
+        </div>
       </div>
-      <div class="map-nearby sr">
-        <div class="nearby-item"><div class="nearby-name">River Oaks Country Club</div><div class="nearby-dist">0.3 mi away</div></div>
-        <div class="nearby-item"><div class="nearby-name">River Oaks Elementary</div><div class="nearby-dist">0.4 mi away</div></div>
-        <div class="nearby-item"><div class="nearby-name">The Galleria</div><div class="nearby-dist">2.1 mi away</div></div>
-        <div class="nearby-item"><div class="nearby-name">Texas Medical Center</div><div class="nearby-dist">4.5 mi away</div></div>
-        <div class="nearby-item"><div class="nearby-name">Downtown Houston</div><div class="nearby-dist">4.8 mi away</div></div>
-        <div class="nearby-item"><div class="nearby-name">Bush Intercontinental Airport</div><div class="nearby-dist">24 mi away</div></div>
-      </div>
+      <div class="map-nearby sr" id="nearbyGrid"></div>
     </div>
   </div>
 
@@ -580,6 +582,14 @@ const LISTINGS = [
   // Breadcrumb
   document.querySelector('.breadcrumb .current').textContent = p.address + ', ' + p.neighborhood;
 
+  // Tab switcher
+  window.openTab = function(btn, id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  };
+
   // Badge
   function badgeClass(s){ return s==='Sold'?'sold':s==='Pending'?'pending':s==='For Rent'?'rent':s==='New'?'new':''; }
   const badge = document.querySelector('.prop-badge');
@@ -615,9 +625,15 @@ const LISTINGS = [
   ].map(([label,value])=>`
     <div class="detail-row"><span class="detail-label">${label}</span><span class="detail-value">${value}</span></div>`).join('');
 
-  // Location tab
-  document.querySelector('.map-placeholder p').textContent = p.address + ', ' + p.neighborhood;
-  document.querySelector('.map-nearby').innerHTML = p.nearby.map(n=>`
+  // Location tab — Google Maps embed (no API key required)
+  const fullAddr = `${p.address}, ${p.city}`;
+  const encodedAddr = encodeURIComponent(fullAddr);
+  document.getElementById('mapFrame').src =
+    `https://maps.google.com/maps?q=${encodedAddr}&z=15&output=embed&hl=en`;
+  document.getElementById('mapAddr').textContent = fullAddr;
+  document.getElementById('mapDirections').href =
+    `https://www.google.com/maps/dir/?api=1&destination=${encodedAddr}`;
+  document.getElementById('nearbyGrid').innerHTML = p.nearby.map(n=>`
     <div class="nearby-item"><div class="nearby-name">${n.name}</div><div class="nearby-dist">${n.dist} away</div></div>`).join('');
 
   // Similar properties
